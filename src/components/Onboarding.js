@@ -5,7 +5,7 @@ import OnboardingItem from "./OnboardingItem";
 import Paginator from "./Paginator";
 import NextButton from './NextButton';
 
-export default Onboarding = () => {
+export default Onboarding = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const viewableItemsChanged = useRef(({ viewableItems }) => {
@@ -36,7 +36,7 @@ export default Onboarding = () => {
         />
       </View>
       <Paginator data={slides} scrollX={scrollX} />
-      <NextButton/>
+      <NextButton data={navigation}/>
     </View>
   );
 };

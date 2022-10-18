@@ -1,16 +1,21 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default NextButton = () => {
+interface registerownerprops{
+  navigation: any;
+}
 
+export default NextButton = ({ props: registerownerprops }) => {
+  const Register = ()=>props.navigation.navigate('RegisterOwner')
   return (
     <View style={styles.container}>
       <View style={styles.button}>
         <Button
           onPress={() => {
-            Alert.alert('funciona')
-        }}
+            Register
+          }}
           title="Crear una cuenta"
           color="#fff"
         />
@@ -19,7 +24,7 @@ export default NextButton = () => {
         <Text style={styles.text}>¿Ya tienes una cuenta?</Text>
         <View style={styles.button2}>
           <Button
-            onPress={() => Alert.alert('funciona2')}
+            onPress={() => Alert.alert("funciona2")}
             title="Inicia Sesión"
             color="#493d8a"
           />
@@ -42,13 +47,12 @@ const styles = StyleSheet.create({
   option: {
     marginTop: 10,
     flexDirection: "row",
-    alignItems: 'center'
+    alignItems: "center",
   },
   button2: {
     color: "#493d8a",
-
   },
-  text:{
-    fontSize: 17
-  }
+  text: {
+    fontSize: 17,
+  },
 });
