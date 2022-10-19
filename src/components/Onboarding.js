@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList, Animated } from "react-native";
 import slides from "../data/slides";
 import OnboardingItem from "./OnboardingItem";
 import Paginator from "./Paginator";
-import NextButton from './NextButton';
+import NextButton from "./NextButton";
 
 export default Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,7 +36,7 @@ export default Onboarding = () => {
         />
       </View>
       <Paginator data={slides} scrollX={scrollX} />
-      <NextButton/>
+      <NextButton />
     </View>
   );
 };
@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#fff",
   },
 });
