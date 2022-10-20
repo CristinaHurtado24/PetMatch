@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, StatusBar } from "react-native";
+import { View, Text, StyleSheet, StatusBar, BackHandler } from "react-native";
 import Onboarding from "./src/components/Onboarding.js";
 import LandingRegister from "./src/components/LandingRegister.js";
 
@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 function HomeScreen() {
   return (
@@ -28,12 +29,25 @@ function SettingsScreen() {
   );
 }
 
-function Registrate() {
+function Match() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Match!</Text>
+    </View>
+  );
+}
+
+function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
-        component={LandingRegister}
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Match"
+        component={Match}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -45,21 +59,31 @@ function Registrate() {
   );
 }
 
-const Stack = createNativeStackNavigator();
-
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName={Onboarding}>
         <Stack.Screen
-          name="Home"
-          component={SingIn}
+          name="Onboarding"
+          component={Onboarding}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Registrate"
-          component={Registrate}
+          name="SingIn"
+          component={SingIn}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="LandingRegister"
+          component={LandingRegister}
           options={{ headerBackTitle: "Back" }}
+        />
+
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false, gestureEnabled: true }}
         />
       </Stack.Navigator>
     </NavigationContainer>

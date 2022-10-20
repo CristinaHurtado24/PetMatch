@@ -1,5 +1,14 @@
-import { View, Text, Image, StyleSheet, useWindowDimensions, Button, Alert } from 'react-native'
-import React from 'react'
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+  Button,
+  Alert,
+  Dimensions,
+} from "react-native";
+import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function RegisterOwner() {
@@ -8,7 +17,7 @@ export default function RegisterOwner() {
     <View>
       <View>
         <Image
-          style={styles.image}
+          style={styles.ima}
           source={{
             uri: "https://media.istockphoto.com/vectors/paw_print-vector-id931785704?k=20&m=931785704&s=612x612&w=0&h=wpnhxlh6HW0tRBxVIWynZMuJ-Lpp5rDRWjlVL2y_nt8=",
           }}
@@ -34,20 +43,22 @@ export default function RegisterOwner() {
             Alert.alert("Inicio con Twitter");
           }}
         />
-        <AntDesign 
-          name="google" 
-          size={40} 
-          color="#493d8a" 
-          onPress={()=>{
-            Alert.alert("Inicio con google")
-        }}/>
-        <AntDesign 
-          name="facebook-square" 
-          size={40} 
-          color="#493d8a" 
-          onPress={()=>{
-            Alert.alert("Inicio con Facebook")
-        }}/>
+        <AntDesign
+          name="google"
+          size={40}
+          color="#493d8a"
+          onPress={() => {
+            Alert.alert("Inicio con google");
+          }}
+        />
+        <AntDesign
+          name="facebook-square"
+          size={40}
+          color="#493d8a"
+          onPress={() => {
+            Alert.alert("Inicio con Facebook");
+          }}
+        />
       </View>
     </View>
   );
@@ -56,13 +67,15 @@ export default function RegisterOwner() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     justifyContent: "center",
     alignItems: "center",
   },
   image: {
     flex: 0.65,
-    marginTop: 40
+    marginTop: 40,
   },
+
   title: {
     fontWeight: "800",
     fontSize: 22,
@@ -77,16 +90,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 64,
     fontSize: 18,
-    marginTop:20
+    marginTop: 20,
   },
   button: {
-    backgroundColor:"#493d8a",
+    backgroundColor: "#493d8a",
     borderRadius: 10,
-    marginTop:15,
+    marginTop: 15,
   },
-  options:{
-    flexDirection:'row',
-    justifyContent: 'space-around',
-    marginTop: 40
-  }
+  options: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 40,
+  },
 });

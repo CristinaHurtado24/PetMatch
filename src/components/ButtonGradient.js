@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   StyleSheet,
   Text,
@@ -11,13 +12,19 @@ import {
   Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import SingIn from "./SingIn";
+import navigation from "./SingIn";
+
+import { useNavigation } from "@react-navigation/native";
 
 export default function ButtonGradient() {
-  const onPress = () => Alert.alert("funciona2");
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => Alert.alert("funciona2")}
+      //onPress={() => navigation.navigate("Onboarding")}
+      onPress={() => navigation.navigate("Home")}
     >
       <LinearGradient
         // Button Linear Gradient
@@ -26,9 +33,7 @@ export default function ButtonGradient() {
         end={{ x: 1, y: 1 }}
         style={styles.button}
       >
-        <Text style={styles.text} onPress={() => Alert.alert("funciona 5")}>
-          Sign in
-        </Text>
+        <Text style={styles.text}>Sign in</Text>
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -53,6 +58,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     width: 200,
-    marginTop: 30,
+    marginTop: 15,
+  },
+
+  button2: {
+    marginTop: 20,
   },
 });
