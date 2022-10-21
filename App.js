@@ -5,44 +5,26 @@ import LandingRegister from "./src/components/LandingRegister.js";
 
 import ButtonGradient from "./src/components/ButtonGradient.js";
 import SingIn from "./src/components/SingIn";
-
+import RegisterData from "./src/components/RegisterData.js";
+import Match from "./src/components/Match.js";
+import Profile from "./src/components/Profile.js";
+import DogData from "./src/components/DogData.js";
 import { NavigationContainer } from "@react-navigation/native";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MatchDiscover from "./src/components/MatchDiscover.js";
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-function Match() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Match!</Text>
-    </View>
-  );
-}
 
 function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="MatchDiscover"
+        component={MatchDiscover}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -51,8 +33,8 @@ function Home() {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="Profile"
+        component={Profile}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
@@ -83,6 +65,17 @@ function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{ headerShown: false, gestureEnabled: true }}
+        />
+
+        <Stack.Screen
+          name="RegisterData"
+          component={RegisterData}
+          options={{ headerShown: false, gestureEnabled: true }}
+        />
+        <Stack.Screen
+          name="DogData"
+          component={DogData}
           options={{ headerShown: false, gestureEnabled: true }}
         />
       </Stack.Navigator>

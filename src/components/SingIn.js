@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ButtonGradient from "./ButtonGradient";
-
+import { AntDesign } from "@expo/vector-icons";
 import {
   StyleSheet,
   Text,
@@ -29,11 +29,38 @@ export default SingIn = ({ navigation }) => {
         ></Image>
       </View>
       <View style={styles.container}>
-        <Text style={styles.titulo}>CHao!</Text>
+        <Text style={styles.titulo}>Hola!</Text>
         <Text style={styles.subTitle}>Accede a tu cuenta</Text>
         <TextInput placeholder="Petmatch@gmail.com" style={styles.textInput} />
 
         <TextInput placeholder="Contraseña" style={styles.textInput} />
+
+        <View style={styles.options}>
+          <AntDesign
+            name="twitter"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con Twitter");
+            }}
+          />
+          <AntDesign
+            name="google"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con google");
+            }}
+          />
+          <AntDesign
+            name="facebook-square"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con Facebook");
+            }}
+          />
+        </View>
 
         <View style={styles.buttontext}>
           <Button
@@ -115,5 +142,11 @@ const styles = StyleSheet.create({
 
     width: 300,
     height: 300,
+  },
+
+  options: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 40,
   },
 });

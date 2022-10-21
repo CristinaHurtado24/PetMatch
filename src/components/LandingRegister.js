@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function RegisterOwner() {
+export default function RegisterOwner({ navigation }) {
   const { width } = useWindowDimensions();
   return (
     <View>
@@ -26,9 +26,7 @@ export default function RegisterOwner() {
       <Text style={styles.title}>Registrate para continuar</Text>
       <View style={styles.button}>
         <Button
-          onPress={() => {
-            Alert.alert("Nice");
-          }}
+          onPress={() => navigation.navigate("RegisterData")}
           title="Continua con email"
           color="#ffff"
         />
