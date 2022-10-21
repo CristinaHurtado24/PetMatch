@@ -94,11 +94,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 30,
   },
-
   imgStyle: {
-    width: width,
     height: 300,
-
     alignItems: "center",
     justifyContent: "center",
   },
