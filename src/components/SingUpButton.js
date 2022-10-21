@@ -17,7 +17,7 @@ import navigation from "./SingIn";
 
 import { useNavigation } from "@react-navigation/native";
 
-export default function ButtonGradient() {
+export default function SingUpButton() {
   const navigation = useNavigation();
 
   return (
@@ -33,7 +33,7 @@ export default function ButtonGradient() {
         end={{ x: 1, y: 1 }}
         style={styles.button}
       >
-        <Text style={styles.text}>Sign in</Text>
+        <Text style={styles.text}>Sign Up</Text>
       </LinearGradient>
     </TouchableOpacity>
   );

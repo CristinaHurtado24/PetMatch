@@ -1,5 +1,8 @@
 import * as React from "react";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ButtonGradient from "./ButtonGradient";
+import { AntDesign } from "@expo/vector-icons";
 import {
   StyleSheet,
   Text,
@@ -11,14 +14,12 @@ import {
   Alert,
   BackHandler,
 } from "react-native";
-import ButtonGradient from "./ButtonGradient";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { NativeScreenNavigationContainer } from "react-native-screens";
+import { useNavigation } from "@react-navigation/native";
 const { width, height } = Dimensions.get("window");
 
 export default SingIn = ({ navigation }) => {
+  //const navigation = useNavigation();
   return (
     <View style={styles.mainContainer}>
       <View style={styles.imgStyle}>
@@ -34,17 +35,51 @@ export default SingIn = ({ navigation }) => {
 
         <TextInput placeholder="Contraseña" style={styles.textInput} />
 
+        <View style={styles.options}>
+          <AntDesign
+            name="twitter"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con Twitter");
+            }}
+          />
+          <AntDesign
+            name="google"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con google");
+            }}
+          />
+          <AntDesign
+            name="facebook-square"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con Facebook");
+            }}
+          />
+        </View>
+
         <View style={styles.buttontext}>
-          <Button color={"grey"} title="¿Olvidaste tu contraseña?" />
+          <Button
+            color={"grey"}
+            title="¿Olvidaste tu contraseña?"
+            //onPress={() => navigation.navigate(Home)}
+            onPress={() => Alert.alert("Poner ruta olvide contraseña")}
+          />
         </View>
 
         <ButtonGradient />
-        <Button
-          title="No tengo cuenta"
-          color={"grey"}
-          style={styles.textGrey}
-          onPress={() => navigation.navigate("Registrate")}
-        />
+        <View style={styles.buttontext}>
+          <Button
+            title="No tengo cuenta"
+            color={"grey"}
+            //onPress={() => Alert.alert("Poner ruta crear cuenta")}
+            onPress={() => navigation.navigate("LandingRegister")}
+          ></Button>
+        </View>
       </View>
     </View>
   );
@@ -72,7 +107,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   buttontext: {
-    fontSize: 15,
+    fontSize: 10,
     color: "grey",
     marginTop: 20,
   },
@@ -104,5 +139,11 @@ const styles = StyleSheet.create({
 
     width: 300,
     height: 300,
+  },
+
+  options: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 40,
   },
 });

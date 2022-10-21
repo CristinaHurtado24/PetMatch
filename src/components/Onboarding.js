@@ -4,8 +4,12 @@ import slides from "../data/slides";
 import OnboardingItem from "./OnboardingItem";
 import Paginator from "./Paginator";
 import NextButton from "./NextButton";
+import SingIn from "./SingIn";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Button } from "react-native-web";
 
-export default Onboarding = () => {
+export default Onboarding = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const viewableItemsChanged = useRef(({ viewableItems }) => {
@@ -36,6 +40,7 @@ export default Onboarding = () => {
         />
       </View>
       <Paginator data={slides} scrollX={scrollX} />
+
       <NextButton />
     </View>
   );

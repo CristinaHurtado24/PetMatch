@@ -1,5 +1,14 @@
-import { View, Text, Image, StyleSheet, useWindowDimensions, Button, Alert } from 'react-native'
-import React from 'react'
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+  Button,
+  Alert,
+  Dimensions,
+} from "react-native";
+import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function RegisterOwner() {
@@ -9,15 +18,15 @@ export default function RegisterOwner() {
       <View>
         <Image
           style={styles.imgpic}
-          source={require("../imgs/PHOTO-2022-10-09-23-15-53.jpg")}
+          source={{
+            uri: "https://media.istockphoto.com/vectors/paw_print-vector-id931785704?k=20&m=931785704&s=612x612&w=0&h=wpnhxlh6HW0tRBxVIWynZMuJ-Lpp5rDRWjlVL2y_nt8=",
+          }}
         />
       </View>
       <Text style={styles.title}>Registrate para continuar</Text>
       <View style={styles.button}>
         <Button
-          onPress={() => {
-            Alert.alert("Nice");
-          }}
+          onPress={() => navigation.navigate("RegisterData")}
           title="Continua con email"
           color="#ffff"
         />
@@ -56,6 +65,7 @@ export default function RegisterOwner() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     justifyContent: "center",
     backgroundColor: "#fff",
   },
@@ -65,6 +75,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
   },
+
   title: {
     fontWeight: "600",
     fontSize: 22,
