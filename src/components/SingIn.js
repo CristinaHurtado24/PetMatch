@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ButtonGradient from "./ButtonGradient";
 import { AntDesign } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
   StyleSheet,
   Text,
@@ -21,68 +22,77 @@ const { width, height } = Dimensions.get("window");
 export default SingIn = ({ navigation }) => {
   //const navigation = useNavigation();
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.imgStyle}>
-        <Image
-          source={require("../imgs/PHOTO-2022-10-09-23-15-53.jpg")}
-          style={styles.imgpic}
-        ></Image>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.titulo}>Hola!</Text>
-        <Text style={styles.subTitle}>Accede a tu cuenta</Text>
-        <TextInput placeholder="Petmatch@gmail.com" style={styles.textInput} />
+    <KeyboardAwareScrollView
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={styles.mainContainer}
+      scrollEnabled
+    >
+      <View style={styles.mainContainer}>
+        <View style={styles.imgStyle}>
+          <Image
+            source={require("../imgs/PHOTO-2022-10-09-23-15-53.jpg")}
+            style={styles.imgpic}
+          ></Image>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.titulo}>Hola!</Text>
+          <Text style={styles.subTitle}>Accede a tu cuenta</Text>
+          <TextInput
+            placeholder="Petmatch@gmail.com"
+            style={styles.textInput}
+          />
 
-        <TextInput placeholder="Contraseña" style={styles.textInput} />
-      </View>
+          <TextInput placeholder="Contraseña" style={styles.textInput} />
+        </View>
 
-      <View style={styles.options}>
-        <AntDesign
-          name="twitter"
-          size={40}
-          color="#941DE8"
-          onPress={() => {
-            Alert.alert("Inicio con Twitter");
-          }}
-        />
-        <AntDesign
-          name="google"
-          size={40}
-          color="#941DE8"
-          onPress={() => {
-            Alert.alert("Inicio con google");
-          }}
-        />
-        <AntDesign
-          name="facebook-square"
-          size={40}
-          color="#941DE8"
-          onPress={() => {
-            Alert.alert("Inicio con Facebook");
-          }}
-        />
-      </View>
+        <View style={styles.options}>
+          <AntDesign
+            name="twitter"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con Twitter");
+            }}
+          />
+          <AntDesign
+            name="google"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con google");
+            }}
+          />
+          <AntDesign
+            name="facebook-square"
+            size={40}
+            color="#941DE8"
+            onPress={() => {
+              Alert.alert("Inicio con Facebook");
+            }}
+          />
+        </View>
 
-      <View style={styles.buttontext}>
-        <Button
-          color={"grey"}
-          title="¿Olvidaste tu contraseña?"
-          //onPress={() => navigation.navigate(Home)}
-          onPress={() => Alert.alert("Poner ruta olvide contraseña")}
-        />
+        <View style={styles.buttontext}>
+          <Button
+            color={"grey"}
+            title="¿Olvidaste tu contraseña?"
+            //onPress={() => navigation.navigate(Home)}
+            onPress={() => Alert.alert("Poner ruta olvide contraseña")}
+          />
+        </View>
+        <View style={styles.container}>
+          <ButtonGradient />
+        </View>
+        <View style={styles.buttontext}>
+          <Button
+            title="No tengo cuenta"
+            color={"grey"}
+            //onPress={() => Alert.alert("Poner ruta crear cuenta")}
+            onPress={() => navigation.navigate("LandingRegister")}
+          ></Button>
+        </View>
       </View>
-      <View style={styles.container}>
-        <ButtonGradient />
-      </View>
-      <View style={styles.buttontext}>
-        <Button
-          title="No tengo cuenta"
-          color={"grey"}
-          //onPress={() => Alert.alert("Poner ruta crear cuenta")}
-          onPress={() => navigation.navigate("LandingRegister")}
-        ></Button>
-      </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
