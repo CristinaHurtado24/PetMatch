@@ -2,14 +2,18 @@ import React from "react";
 import { View, Text, StyleSheet, Button, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SingIn from "./SingIn";
+import { useNavigation } from "@react-navigation/native";
+
 export default NextButton = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.button}>
         <Button
-          onPress={() => {
-            Alert.alert("funciona");
-          }}
+          onPress={() => navigation.navigate("LandingRegister")}
           title="Crear una cuenta"
           color="#fff"
         />
@@ -18,9 +22,9 @@ export default NextButton = () => {
         <Text style={styles.text}>¿Ya tienes una cuenta?</Text>
         <View style={styles.button2}>
           <Button
-            onPress={() => Alert.alert("funciona2")}
+            onPress={() => navigation.navigate("SingIn")}
             title="Inicia Sesión"
-            color="#493d8a"
+            color="#941DE8"
           />
         </View>
       </View>
@@ -35,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#493d8a",
+    backgroundColor: "#941DE8",
     borderRadius: 6,
   },
   option: {
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button2: {
-    color: "#493d8a",
+    color: "#941DE8",
   },
   text: {
     fontSize: 17,

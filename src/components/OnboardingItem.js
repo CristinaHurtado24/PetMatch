@@ -14,7 +14,7 @@ export default OnboardingItem = ({ item }) => {
     <View style={[styles.container, { width }]}>
       <Image source={{ uri: item.image }} style={styles.imgpic} />
 
-      <View style={{ flex: 0.3 }}>
+      <View style={[styles.info, { flex: 0.3 }]}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.description}>{item.description}</Text>
       </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     fontSize: 28,
     marginBottom: 10,
-    color: "#493d8a",
+    color: "#941DE8",
     textAlign: "center",
   },
   description: {
@@ -44,8 +44,11 @@ const styles = StyleSheet.create({
     color: "#62656b",
     textAlign: "center",
     paddingHorizontal: 64,
+    marginTop:10
   },
-
+  info:{
+    marginTop:20
+  },
   imgpic: {
     marginTop: 50,
     width: 300,

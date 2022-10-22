@@ -1,52 +1,21 @@
-//const express = require('express');
-//const app = express();
-
-//Settings
-// app.set('port', process.env.PORT || 3000)
-
-
-
-
-
-
-// //Starting the server
-// app.listen(app.get('port'), () => {
-//   console.log('port is listening');
-// })
-
-// const app = express();
-
-// const User = require('./models/User')
-
-//const email = 'example'
-// app.post('/create-user', async (res,res) => {
-//  const is NewUser = await User.isthisEmailInUse(email)
-// if (!isNewUser) return res.json({success: false, message: "Este email esta en uso"})
-//   const user = await User({
-//  email:email,
-//});
-//   await user.save();
-//   res.json(user);
-// })
-
-// app.get('/', (req, res) => {
-//     res.send('Hello')
-// })
-
-//require('./models/db');
-
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, StatusBar, ScrollView } from "react-native";
+import { View, Text, StyleSheet, StatusBar, BackHandler } from "react-native";
 import Onboarding from "./src/components/Onboarding.js";
 import LandingRegister from "./src/components/LandingRegister.js";
 
 import ButtonGradient from "./src/components/ButtonGradient.js";
 import SingIn from "./src/components/SingIn";
-
+import RegisterData from "./src/components/RegisterData.js";
+import Match from "./src/components/Match.js";
+import Profile from "./src/components/Profile.js";
+import DogData from "./src/components/DogData.js";
 import { NavigationContainer } from "@react-navigation/native";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MatchDiscover from "./src/components/MatchDiscover.js";
+import Axios from "axios";
 
 const Tab = createBottomTabNavigator();
 
@@ -57,47 +26,66 @@ function HomeScreen() {
     </View>
   );
 }
+const Stack = createNativeStackNavigator();
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-function Registrate() {
+function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
-        component={LandingRegister}
+        name="MatchDiscover"
+        component={MatchDiscover}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="Match"
+        component={Match}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
   );
 }
 
-const Stack = createNativeStackNavigator();
-
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName={Onboarding}>
         <Stack.Screen
-          name="Home"
-          component={SingIn}
+          name="Onboarding"
+          component={Onboarding}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Registrate"
-          component={Registrate}
-          options={{ headerBackTitle: "Back" }}
+          name="SingIn"
+          component={SingIn}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="LandingRegister"
+          component={LandingRegister}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false, gestureEnabled: true }}
+        />
+
+        <Stack.Screen
+          name="RegisterData"
+          component={RegisterData}
+          options={{ headerShown: false, gestureEnabled: true }}
+        />
+        <Stack.Screen
+          name="DogData"
+          component={DogData}
+          options={{ headerShown: false, gestureEnabled: true }}
         />
       </Stack.Navigator>
     </NavigationContainer>

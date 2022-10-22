@@ -1,15 +1,24 @@
-import { View, Text, Image, StyleSheet, useWindowDimensions, Button, Alert } from 'react-native'
-import React from 'react'
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+  Button,
+  Alert,
+  Dimensions,
+} from "react-native";
+import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 
 export default function RegisterOwner() {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   return (
-    <View>
+    <View style={[styles.container, width, height]}>
       <View>
         <Image
-          style={styles.image}
+          style={styles.imgpic}
           source={{
             uri: "https://media.istockphoto.com/vectors/paw_print-vector-id931785704?k=20&m=931785704&s=612x612&w=0&h=wpnhxlh6HW0tRBxVIWynZMuJ-Lpp5rDRWjlVL2y_nt8=",
           }}
@@ -18,38 +27,38 @@ export default function RegisterOwner() {
       <Text style={styles.title}>Registrate para continuar</Text>
       <View style={styles.button}>
         <Button
-          onPress={() => {
-            Alert.alert("Nice");
-          }}
+          onPress={() => navigation.navigate("RegisterData")}
           title="Continua con email"
           color="#ffff"
         />
       </View>
-      <Text style={styles.text}>O registrate con</Text>
+      {/* <Text style={styles.text}>O registrate con</Text>
       <View style={styles.options}>
         <AntDesign
           name="twitter"
           size={40}
-          color="#493d8a"
+          color="#941DE8"
           onPress={() => {
             Alert.alert("Inicio con Twitter");
           }}
         />
-        <AntDesign 
-          name="google" 
-          size={40} 
-          color="#493d8a" 
-          onPress={()=>{
-            Alert.alert("Inicio con google")
-        }}/>
-        <AntDesign 
-          name="facebook-square" 
-          size={40} 
-          color="#493d8a" 
-          onPress={()=>{
-            Alert.alert("Inicio con Facebook")
-        }}/>
-      </View>
+        <AntDesign
+          name="google"
+          size={40}
+          color="#941DE8"
+          onPress={() => {
+            Alert.alert("Inicio con google");
+          }}
+        />
+        <AntDesign
+          name="facebook-square"
+          size={40}
+          color="#941DE8"
+          onPress={() => {
+            Alert.alert("Inicio con Facebook");
+          }}
+        />
+      </View> */}
     </View>
   );
 }
@@ -57,18 +66,22 @@ export default function RegisterOwner() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#fff",
   },
-  image: {
-    flex: 0.65,
-    marginTop: 40
+  imgpic: {
+    marginTop: 10,
+    alignSelf: "center",
+    width: 300,
+    height: 300,
   },
+
   title: {
-    fontWeight: "800",
+    fontWeight: "600",
     fontSize: 22,
     marginBottom: 10,
-    marginTop: -40,
+    marginTop: 20,
     color: "black",
     textAlign: "center",
   },
@@ -78,16 +91,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 64,
     fontSize: 18,
-    marginTop:20
+    marginTop: 30,
+    marginBottom:30
   },
   button: {
-    backgroundColor:"#493d8a",
+    backgroundColor: "#941DE8",
     borderRadius: 10,
-    marginTop:15,
+    marginTop: 15,
+    width: 300,
+    alignSelf:'center'
   },
-  options:{
-    flexDirection:'row',
-    justifyContent: 'space-around',
-    marginTop: 40
-  }
+  options: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 40,
+  },
 });
