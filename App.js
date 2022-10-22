@@ -59,7 +59,7 @@ function App() {
         <Stack.Screen
           name="LandingRegister"
           component={LandingRegister}
-          options={{ headerBackTitle: "Back" }}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen

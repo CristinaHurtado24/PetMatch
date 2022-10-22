@@ -24,7 +24,7 @@ export default NextButton = () => {
           <Button
             onPress={() => navigation.navigate("SingIn")}
             title="Inicia Sesión"
-            color="#493d8a"
+            color="#941DE8"
           />
         </View>
       </View>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#493d8a",
+    backgroundColor: "#941DE8",
     borderRadius: 6,
   },
   option: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button2: {
-    color: "#493d8a",
+    color: "#941DE8",
   },
   text: {
     fontSize: 17,

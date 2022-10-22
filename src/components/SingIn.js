@@ -34,52 +34,53 @@ export default SingIn = ({ navigation }) => {
         <TextInput placeholder="Petmatch@gmail.com" style={styles.textInput} />
 
         <TextInput placeholder="Contraseña" style={styles.textInput} />
+      </View>
 
-        <View style={styles.options}>
-          <AntDesign
-            name="twitter"
-            size={40}
-            color="#941DE8"
-            onPress={() => {
-              Alert.alert("Inicio con Twitter");
-            }}
-          />
-          <AntDesign
-            name="google"
-            size={40}
-            color="#941DE8"
-            onPress={() => {
-              Alert.alert("Inicio con google");
-            }}
-          />
-          <AntDesign
-            name="facebook-square"
-            size={40}
-            color="#941DE8"
-            onPress={() => {
-              Alert.alert("Inicio con Facebook");
-            }}
-          />
-        </View>
+      <View style={styles.options}>
+        <AntDesign
+          name="twitter"
+          size={40}
+          color="#941DE8"
+          onPress={() => {
+            Alert.alert("Inicio con Twitter");
+          }}
+        />
+        <AntDesign
+          name="google"
+          size={40}
+          color="#941DE8"
+          onPress={() => {
+            Alert.alert("Inicio con google");
+          }}
+        />
+        <AntDesign
+          name="facebook-square"
+          size={40}
+          color="#941DE8"
+          onPress={() => {
+            Alert.alert("Inicio con Facebook");
+          }}
+        />
+      </View>
 
-        <View style={styles.buttontext}>
-          <Button
-            color={"grey"}
-            title="¿Olvidaste tu contraseña?"
-            //onPress={() => navigation.navigate(Home)}
-            onPress={() => Alert.alert("Poner ruta olvide contraseña")}
-          />
-        </View>
-
+      <View style={styles.buttontext}>
+        <Button
+          color={"grey"}
+          title="¿Olvidaste tu contraseña?"
+          //onPress={() => navigation.navigate(Home)}
+          onPress={() => Alert.alert("Poner ruta olvide contraseña")}
+        />
+      </View>
+      <View style={styles.container}>
         <ButtonGradient />
-        <View style={styles.buttontext}>
-          <Button
-            title="No tengo cuenta"
-            color={"grey"}
-            //onPress={() => Alert.alert("Poner ruta crear cuenta")}
-            onPress={() => navigation.navigate("LandingRegister")}
-          ></Button>
-        </View>
+      </View>
+      <View style={styles.buttontext}>
+        <Button
+          title="No tengo cuenta"
+          color={"grey"}
+          //onPress={() => Alert.alert("Poner ruta crear cuenta")}
+          onPress={() => navigation.navigate("LandingRegister")}
+        ></Button>
       </View>
     </View>
   );
@@ -93,9 +94,7 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-    justifyContent: "center",
   },
-
   titulo: {
     fontSize: 80,
     fontWeight: "bold",
@@ -140,7 +139,6 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
   },
-
   options: {
     flexDirection: "row",
     justifyContent: "space-around",

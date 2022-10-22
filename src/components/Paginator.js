@@ -25,10 +25,11 @@ export default Paginator=({data, scrollX})=>{
 }
 
 const styles = StyleSheet.create({
-    dot:{
-        height: 10,
-        borderRadius:5,
-        backgroundColor: '#493d8a',
-        marginHorizontal: 8,
-    }
-})
+  dot: {
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "#941DE8",
+    marginHorizontal: 8,
+    marginTop:30
+  },
+});

@@ -12,8 +12,6 @@ import {
   Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import SingIn from "./SingIn";
-import navigation from "./SingIn";
 
 import { useNavigation } from "@react-navigation/native";
 
