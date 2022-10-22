@@ -59,20 +59,20 @@ export default PetCard = () => {
             <Text style={styles.name}>{u.name}</Text>
             <View style={styles.icons}>
               <AntDesign
-                name="heart"
+                name="message1"
                 size={50}
                 color="#1C1A19"
                 onPress={() => {
-                  Alert.alert("Inicio con Facebook");
+                  Alert.alert("mensaje a usuario");
                 }}
               />
 
               <AntDesign
-                name="WhatsApp"
+                name="close"
                 size={50}
                 color="#1C1A19"
                 onPress={() => {
-                  Alert.alert("Inicio con Facebook");
+                  Alert.alert("quitar de match");
                 }}
               />
             </View>
