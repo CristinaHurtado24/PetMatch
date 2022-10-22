@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, useWindowDimensions, Button, Alert } fro
 import React from 'react'
 import { AntDesign } from "@expo/vector-icons";
 
+
 export default function RegisterOwner() {
   const { width } = useWindowDimensions();
   return (

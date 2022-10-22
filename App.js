@@ -1,5 +1,42 @@
+const express = require('express');
+const app = express();
+
+//Settings
+app.set('port', process.env.PORT || 3000)
+
+
+
+
+
+
+//Starting the server
+app.listen(app.get('port'), () => {
+  console.log('port is listening');
+})
+
+// const app = express();
+
+// const User = require('./models/User')
+
+//const email = 'example'
+// app.post('/create-user', async (res,res) => {
+//  const is NewUser = await User.isthisEmailInUse(email)
+// if (!isNewUser) return res.json({success: false, message: "Este email esta en uso"})
+//   const user = await User({
+//  email:email,
+//});
+//   await user.save();
+//   res.json(user);
+// })
+
+// app.get('/', (req, res) => {
+//     res.send('Hello')
+// })
+
+//require('./models/db');
+
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, StatusBar } from "react-native";
+import { View, Text, StyleSheet, StatusBar, ScrollView } from "react-native";
 import Onboarding from "./src/components/Onboarding.js";
 import LandingRegister from "./src/components/LandingRegister.js";
 
@@ -10,6 +47,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {

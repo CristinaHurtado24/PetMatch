@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     width: 200,
-    marginTop: 30,
+    marginTop: 10,
   },
 });
