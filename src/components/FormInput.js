@@ -5,9 +5,9 @@ const FormInput = (props) => {
     const {placeholder, title, error} = props
     return (
         <>
-        <View style={{justifyContent:"space-between"}}>
+        <View style={{justifyContent:"center", justifyItems:'center'}}>
             <Text style={styles.textGrey}>{title}</Text>
-            {error ? (<Text style={{color: 'red', fontSize: 12}}>{error}</Text>): null}
+            {error ? (<Text style={{color: 'red', fontSize: 12,  alignSelf:'center'}}>{error}</Text>): null}
         </View>
             <TextInput {...props} placeholder={placeholder} style={styles.textInput} />
         </>
@@ -19,6 +19,7 @@ textGrey: {
     fontSize: 15,
     color: "gray",
     marginTop: 20,
+    alignSelf:"center"
 },
 
 textInput: {
