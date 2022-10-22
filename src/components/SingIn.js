@@ -1,9 +1,10 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ButtonGradient from "./ButtonGradient";
 import { AntDesign } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {useState} from "react";
+import {Formik} from "formik";
+import * as Yup from "yup";
 import {
   StyleSheet,
   Text,
@@ -12,15 +13,35 @@ import {
   Image,
   Dimensions,
   Button,
+  useWindowDimensions,
   Alert,
   BackHandler,
+  ScrollView,
 } from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
+
+import FormContainer from './FormContainer';
+import FormInput from './FormInput';
+
+const validationSchema = Yup.object({
+  email: Yup.string().email('Correo invalido').required('El correo es requerido'),
+  password: Yup.string().required('La contrasena es requerida')
+})
 const { width, height } = Dimensions.get("window");
 
 export default SingIn = ({ navigation }) => {
   //const navigation = useNavigation();
+  const [text, onChangeText] = React.useState("");
+  const userInfo = {
+    email: '',
+    password: '',
+  };
+
+  const {email, password} = userInfo;
+
+  const handleonChangetext = (value, fieldName) => {
+    setUserInfo({...userInfo, [fieldName]:value})
+  }
+
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -37,13 +58,36 @@ export default SingIn = ({ navigation }) => {
         <View style={styles.container}>
           <Text style={styles.titulo}>Hola!</Text>
           <Text style={styles.subTitle}>Accede a tu cuenta</Text>
-          <TextInput
-            placeholder="Petmatch@gmail.com"
-            style={styles.textInput}
-          />
-
-          <TextInput placeholder="Contraseña" style={styles.textInput} />
         </View>
+        <FormContainer>
+        <Formik initialValues={userInfo} validationSchema={validationSchema}>
+          {({values, errors, handleChange, touched, handleBlur}) => {
+            const{email, password}=values
+            return <>
+            <FormInput 
+            error = {touched.email && errors.email}
+            onChangeText={handleChange('email')}
+            onBlur = {handleBlur('email')}
+            autoCapitalize = "none" 
+            title='Correo Electrónico' 
+            placeholder="petmatch@gmail.com"
+            value = {email}
+            />
+            <FormInput
+            error = {touched.password && errors.password}
+            onChangeText={handleChange('password')}
+            onBlur = {handleBlur('password')}
+            autoCapitalize = "none"
+            secureTextEntry
+            title="Contraseña"
+            placeholder="********"
+            value = {password}
+            />
+            <ButtonGradient />
+            </>
+          }}
+        </Formik>
+        </FormContainer>
 
         <View style={styles.options}>
           <AntDesign
@@ -71,7 +115,6 @@ export default SingIn = ({ navigation }) => {
             }}
           />
         </View>
-
         <View style={styles.buttontext}>
           <Button
             color={"grey"}
@@ -93,7 +136,7 @@ export default SingIn = ({ navigation }) => {
         </View>
       </View>
     </KeyboardAwareScrollView>
-  );
+);
 };
 
 const styles = StyleSheet.create({
@@ -101,12 +144,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
   },
   container: {
     alignItems: "center",
   },
   titulo: {
-    fontSize: 80,
+    marginTop: 10,
+    fontSize: 60,
     fontWeight: "bold",
     color: "#34434D",
   },
@@ -146,8 +193,8 @@ const styles = StyleSheet.create({
   imgpic: {
     marginTop: 10,
 
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
   },
   options: {
     flexDirection: "row",

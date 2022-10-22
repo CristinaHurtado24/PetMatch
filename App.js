@@ -1,3 +1,40 @@
+const express = require('express');
+const app = express();
+
+//Settings
+app.set('port', process.env.PORT || 3000)
+
+
+
+
+
+
+//Starting the server
+app.listen(app.get('port'), () => {
+  console.log('port is listening');
+})
+
+// const app = express();
+
+// const User = require('./models/User')
+
+//const email = 'example'
+// app.post('/create-user', async (res,res) => {
+//  const is NewUser = await User.isthisEmailInUse(email)
+// if (!isNewUser) return res.json({success: false, message: "Este email esta en uso"})
+//   const user = await User({
+//  email:email,
+//});
+//   await user.save();
+//   res.json(user);
+// })
+
+// app.get('/', (req, res) => {
+//     res.send('Hello')
+// })
+
+//require('./models/db');
+
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, StatusBar, BackHandler } from "react-native";
 import Onboarding from "./src/components/Onboarding.js";
@@ -17,6 +54,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MatchDiscover from "./src/components/MatchDiscover.js";
 
 const Tab = createBottomTabNavigator();
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
 const Stack = createNativeStackNavigator();
 
 function Home() {
