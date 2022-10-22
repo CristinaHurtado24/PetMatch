@@ -20,26 +20,18 @@ import { ScrollView } from "react-native-web";
 
 const { width, height } = Dimensions.get("window");
 
-export default Profile = ({ navigation }) => {
+export default Profile = ({ route, navigation }) => {
+  const { name, url } = route.params;
   return (
     <View style={styles.container}>
       <Image
         source={{
-          uri: "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+          uri: "https://s1.eestatic.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg",
         }}
         style={styles.imgpic}
       />
-
-      <Text style={styles.person}>Mascota</Text>
-
-      <Text style={styles.textInput}>Nombre Mascota</Text>
-      <Text style={styles.textInput}>Raza</Text>
-      <Text style={styles.textInput}>Edad</Text>
-      <Text style={styles.textInput}>Sexo</Text>
-
-      <Text style={styles.person}>Dueño</Text>
-      <Text style={styles.textInput}>Nombre Dueño</Text>
-      <Text style={styles.textInput}>Apellido</Text>
+      <Text>ProfileMatch</Text>
+      <Text>{name}</Text>
     </View>
   );
 };

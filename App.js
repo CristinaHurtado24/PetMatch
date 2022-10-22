@@ -9,6 +9,7 @@ import RegisterData from "./src/components/RegisterData.js";
 import Match from "./src/components/Match.js";
 import Profile from "./src/components/Profile.js";
 import DogData from "./src/components/DogData.js";
+import ProfileMatch from "./src/components/ProfileMatch.js";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -21,21 +22,42 @@ const Stack = createNativeStackNavigator();
 
 function Home() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#941DE8" },
+
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontSize: 30,
+        },
+      }}
+    >
       <Tab.Screen
         name="MatchDiscover"
         component={MatchDiscover}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          title: "Discover",
+          headerBackVisible: false,
+        }}
       />
       <Tab.Screen
         name="Match"
         component={Match}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          title: "Match",
+          headerBackVisible: false,
+        }}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          title: "Profile",
+          headerBackVisible: false,
+        }}
       />
     </Tab.Navigator>
   );
@@ -65,7 +87,10 @@ function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ headerShown: false, gestureEnabled: true }}
+          options={{
+            headerShown: false,
+            gestureEnabled: true,
+          }}
         />
 
         <Stack.Screen
@@ -76,6 +101,11 @@ function App() {
         <Stack.Screen
           name="DogData"
           component={DogData}
+          options={{ headerShown: false, gestureEnabled: true }}
+        />
+        <Stack.Screen
+          name="ProfileMatch"
+          component={ProfileMatch}
           options={{ headerShown: false, gestureEnabled: true }}
         />
       </Stack.Navigator>

@@ -2,6 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ButtonGradient from "./ButtonGradient";
+import PetCard from "./PetCard";
 
 import {
   StyleSheet,
@@ -19,10 +20,10 @@ import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
-export default MatchDiscover = ({ navigation }) => {
+export default Match = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hola discover</Text>
+      <PetCard></PetCard>
     </View>
   );
 };
