@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import UseAuth from "../hooks/useAuth.js";
 import {
   StyleSheet,
   Text,
@@ -22,7 +23,8 @@ import user_login from "../api/user_api";
 import FormContainer from "./FormContainer";
 import FormInput from "./FormInput";
 import { signin } from "../../utilities/auth";
-import axios from "axios";
+
+//import axios from "axios";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -38,20 +40,9 @@ const initialValues = {
 };
 
 export default SingIn = ({ navigation }) => {
-  const handleLogin = (email,user_password) => {
-    axios({
-      method: 'post',
-      url: 'http://localhost:3000/api/user/signin',
-      data: {
-        email,
-        user_password,
-      }
-    })
-    .then ((res) => {
-      console.log(res);
-    });
-  };
+  const {signInWithGoogle} = UseAuth();
 
+  // console.log(user);
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -73,7 +64,7 @@ export default SingIn = ({ navigation }) => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleLogin}
+            //onSubmit={}
           >
             {({ errors, values, handleSubmit, handleChange }) => {
               return (
@@ -93,7 +84,7 @@ export default SingIn = ({ navigation }) => {
                     name="user_password"
                     onChange={handleChange("user_password")}
                   />
-                  <ButtonGradient title="Sign-In" onPress={handleSubmit} />
+                  <ButtonGradient title="login" onPress={signInWithGoogle} />
                 </>
               );
             }}

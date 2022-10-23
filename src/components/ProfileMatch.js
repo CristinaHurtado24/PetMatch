@@ -6,33 +6,34 @@ import {
   View,
   Image,
   Dimensions,
-  ScrollView,
   StatusBar,
+  ScrollView,
 } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
-export default Profile = ({ navigation }) => {
+export default Profile = ({ route, navigation }) => {
+  const { name, url } = route.params;
+
   return (
     <ScrollView style={styles.containerScroll}>
       <View style={styles.container}>
         <Image
           source={{
-            uri: "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+            uri: url,
           }}
           style={styles.imgpic}
         />
-
         <Text style={styles.person}>Mascota</Text>
 
-        <Text style={styles.textInput}>Nombre Mascota</Text>
-        <Text style={styles.textInput}>Raza</Text>
-        <Text style={styles.textInput}>Edad</Text>
-        <Text style={styles.textInput}>Sexo</Text>
+        <Text style={styles.textInput}>{name}</Text>
+        <Text style={styles.textInput}>Falta prop Raza</Text>
+        <Text style={styles.textInput}> Falta prop Edad</Text>
+        <Text style={styles.textInput}>Falta prop Sexo</Text>
 
         <Text style={styles.person}>Dueño</Text>
-        <Text style={styles.textInput}>Nombre Dueño</Text>
-        <Text style={styles.textInput}>Apellido</Text>
+        <Text style={styles.textInput}>Falta prop Nombre Dueño</Text>
+        <Text style={styles.textInput}>Falta prop Apellido</Text>
       </View>
     </ScrollView>
   );
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   imgpic: {
-    marginTop: 10,
+    marginTop: 20,
     width: 200,
     height: 200,
     marginBottom: 20,
