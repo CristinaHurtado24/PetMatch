@@ -1,4 +1,4 @@
-import user from '../src/api/user_api';
+import Api from '../src/api/Api';
 
 const catchError = error => {
     if (error?.response?.data){
@@ -9,18 +9,18 @@ const catchError = error => {
 
 };
 
-export const signup = async values => {
+export const signup = async (values) => {
     try {
-        const {data} = await user.post('/users/create', {...values});
+        const {data} = await Api.post('/user/create', {...values});
         return data;
     } catch (error) {
         return catchError(error);
     }
 };
 
-export const signin = async values => {
+export const signin = async (values) => {
     try {
-        const {data} = await user.post('/user/login', {...values});
+        const { data } = await Api.post("/user/signin", { ...values });
         return data;
     } catch (error) {
         return catchError(error);

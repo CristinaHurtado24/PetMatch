@@ -18,46 +18,37 @@ import {
   BackHandler,
   ScrollView,
 } from "react-native";
-import  user_login from '../api/user_api';
+import user_login from "../api/user_api";
 import FormContainer from "./FormContainer";
 import FormInput from "./FormInput";
 import { signin } from "../../utilities/auth";
-
 
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Correo invalido")
     .required("El correo es requerido"),
-  password: Yup.string().required("La contrasena es requerida"),
+  user_password: Yup.string().required("La contrasena es requerida"),
 });
 const { width, height } = Dimensions.get("window");
 
-
 const initialValues = {
   email: "",
-  password: "",
- };
-
+  user_password: "",
+};
 
 export default SingIn = ({ navigation }) => {
-
   const handleLogin = async (values, formikActions) => {
-    const res = await signin(values);
-    formikActions.setSubmitting(false);
-
-    if(!res.success) return console.log(res.error)
+    setTimeout(async()=> {
+      console.log(values)
+      const res = await signin(values);
+      formikActions.setSubmitting(false);
+      console.log(res.success)
+  
+      if (!res.success) return console.log(res.error);
       formikActions.resetForm();
       console.log(res);
-      
-
-
-  }
-
-
-    const submitForm = (email,password) => {
-        console.log(email),
-        console.log(password)
-    }
+    },3000)
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -77,31 +68,30 @@ export default SingIn = ({ navigation }) => {
           <Text style={styles.subTitle}>Accede a tu cuenta</Text>
         </View>
         <FormContainer>
-          <Formik 
-          initialValues={initialValues} 
-          validationSchema={validationSchema}
-          onSubmit={handleLogin}
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleLogin}
           >
-            {({handleSubmit}) => {
+            {({ errors, values, handleSubmit, handleChange }) => {
               return (
                 <>
                   <FormInput
                     autoCapitalize="none"
                     title="Correo Electrónico"
                     placeholder="petmatch@gmail.com"
-                    name = 'email'
+                    name="email"
+                    onChange={handleChange("email")}
                   />
                   <FormInput
                     autoCapitalize="none"
                     secureTextEntry
                     title="Contraseña"
                     placeholder="********"
-                    name = 'password'
+                    name="user_password"
+                    onChange={handleChange("user_password")}
                   />
-                  <ButtonGradient 
-                    title = 'Sign-In'
-                    onPress = {handleSubmit}
-                  />
+                  <ButtonGradient title="Sign-In" onPress={handleSubmit} />
                 </>
               );
             }}
