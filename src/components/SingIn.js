@@ -1,9 +1,10 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ButtonGradient from "./ButtonGradient";
 import { AntDesign } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useState } from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 import {
   StyleSheet,
   Text,
@@ -12,15 +13,30 @@ import {
   Image,
   Dimensions,
   Button,
+  useWindowDimensions,
   Alert,
   BackHandler,
+  ScrollView,
 } from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
+import FormContainer from "./FormContainer";
+import FormInput from "./FormInput";
+import axios from "axios";
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Correo invalido")
+    .required("El correo es requerido"),
+  user_password: Yup.string().required("La contrasena es requerida"),
+});
 const { width, height } = Dimensions.get("window");
 
+const initialValues = {
+  email: "",
+  user_password: "",
+};
+
 export default SingIn = ({ navigation }) => {
-  //const navigation = useNavigation();
+
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -37,15 +53,39 @@ export default SingIn = ({ navigation }) => {
         <View style={styles.container}>
           <Text style={styles.titulo}>Hola!</Text>
           <Text style={styles.subTitle}>Accede a tu cuenta</Text>
-          <TextInput
-            placeholder="Petmatch@gmail.com"
-            style={styles.textInput}
-          />
-
-          <TextInput placeholder="Contraseña" style={styles.textInput} />
         </View>
+        <FormContainer>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleLogin}
+          >
+            {({ errors, values, handleSubmit, handleChange }) => {
+              return (
+                <>
+                  <FormInput
+                    autoCapitalize="none"
+                    title="Correo Electrónico"
+                    placeholder="petmatch@gmail.com"
+                    name="email"
+                    onChange={handleChange("email")}
+                  />
+                  <FormInput
+                    autoCapitalize="none"
+                    secureTextEntry
+                    title="Contraseña"
+                    placeholder="********"
+                    name="user_password"
+                    onChange={handleChange("user_password")}
+                  />
+                  <ButtonGradient title="Sign-In" onPress={handleSubmit} />
+                </>
+              );
+            }}
+          </Formik>
+        </FormContainer>
 
-        <View style={styles.options}>
+        {/* <View style={styles.options}>
           <AntDesign
             name="twitter"
             size={40}
@@ -70,8 +110,7 @@ export default SingIn = ({ navigation }) => {
               Alert.alert("Inicio con Facebook");
             }}
           />
-        </View>
-
+        </View> */}
         <View style={styles.buttontext}>
           <Button
             color={"grey"}
@@ -79,9 +118,6 @@ export default SingIn = ({ navigation }) => {
             //onPress={() => navigation.navigate(Home)}
             onPress={() => Alert.alert("Poner ruta olvide contraseña")}
           />
-        </View>
-        <View style={styles.container}>
-          <ButtonGradient />
         </View>
         <View style={styles.buttontext}>
           <Button
@@ -101,12 +137,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+    width: Dimensions.get("screen").width,
+    height: Dimensions.get("screen").height,
   },
   container: {
     alignItems: "center",
   },
   titulo: {
-    fontSize: 80,
+    marginTop: 10,
+    fontSize: 60,
     fontWeight: "bold",
     color: "#34434D",
   },
@@ -146,8 +186,8 @@ const styles = StyleSheet.create({
   imgpic: {
     marginTop: 10,
 
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
   },
   options: {
     flexDirection: "row",
