@@ -18,9 +18,11 @@ import {
   BackHandler,
   ScrollView,
 } from "react-native";
-
+import  user_login from '../api/user_api';
 import FormContainer from "./FormContainer";
 import FormInput from "./FormInput";
+import { signin } from "../../utilities/auth";
+
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -30,19 +32,32 @@ const validationSchema = Yup.object({
 });
 const { width, height } = Dimensions.get("window");
 
+
+const initialValues = {
+  email: "",
+  password: "",
+ };
+
+
 export default SingIn = ({ navigation }) => {
-  //const navigation = useNavigation();
-  const [text, onChangeText] = React.useState("");
-  const userInfo = {
-    email: "",
-    password: "",
-  };
 
-  const { email, password } = userInfo;
+  const handleLogin = async (values, formikActions) => {
+    const res = await signin(values);
+    formikActions.setSubmitting(false);
 
-  const handleonChangetext = (value, fieldName) => {
-    setUserInfo({ ...userInfo, [fieldName]: value });
-  };
+    if(!res.success) return console.log(res.error)
+      formikActions.resetForm();
+      console.log(res);
+      
+
+
+  }
+
+
+    const submitForm = (email,password) => {
+        console.log(email),
+        console.log(password)
+    }
 
   return (
     <KeyboardAwareScrollView
@@ -62,31 +77,31 @@ export default SingIn = ({ navigation }) => {
           <Text style={styles.subTitle}>Accede a tu cuenta</Text>
         </View>
         <FormContainer>
-          <Formik initialValues={userInfo} validationSchema={validationSchema}>
-            {({ values, errors, handleChange, touched, handleBlur }) => {
-              const { email, password } = values;
+          <Formik 
+          initialValues={initialValues} 
+          validationSchema={validationSchema}
+          onSubmit={handleLogin}
+          >
+            {({handleSubmit}) => {
               return (
                 <>
                   <FormInput
-                    error={touched.email && errors.email}
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
                     autoCapitalize="none"
                     title="Correo Electrónico"
                     placeholder="petmatch@gmail.com"
-                    value={email}
+                    name = 'email'
                   />
                   <FormInput
-                    error={touched.password && errors.password}
-                    onChangeText={handleChange("password")}
-                    onBlur={handleBlur("password")}
                     autoCapitalize="none"
                     secureTextEntry
                     title="Contraseña"
                     placeholder="********"
-                    value={password}
+                    name = 'password'
                   />
-                  <ButtonGradient />
+                  <ButtonGradient 
+                    title = 'Sign-In'
+                    onPress = {handleSubmit}
+                  />
                 </>
               );
             }}

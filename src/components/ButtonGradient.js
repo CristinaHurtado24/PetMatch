@@ -10,30 +10,37 @@ import {
   TouchableOpacity,
   Button,
   Alert,
+  Pressable,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { useNavigation } from "@react-navigation/native";
+import { useFormikContext } from "formik";
 
 export default function ButtonGradient() {
   const navigation = useNavigation();
 
+  const {handleSubmit, isSubmitting} = useFormikContext()
   return (
     <TouchableOpacity
-      style={styles.container}
-      //onPress={() => navigation.navigate("Onboarding")}
-      onPress={() => navigation.navigate("Home")}
+    style={styles.container}
+    //   onPress={() => navigation.navigate("Onboarding")}
+    //   onPress={() => navigation.navigate("Home")}
     >
-      <LinearGradient
+
+    <Pressable onPress={handleSubmit} style={[styles.button, 
+    {backgroundColor: isSubmitting ? '#C691EB' : '#941DE8'}]}>
+    <Text style={styles.text}>Sign in</Text>
+    </Pressable>
+      {/* /* {<LinearGradient
         // Button Linear Gradient
         colors={["#941DE8", "#C691EB"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.button}
       >
-        <Text style={styles.text}>Sign in</Text>
-      </LinearGradient>
-    </TouchableOpacity>
+      </LinearGradient>*/ }
+    </TouchableOpacity> 
   );
 }
 

@@ -1,15 +1,29 @@
+import { useFormikContext } from "formik";
 import * as React from "react";
 import {View, StyleSheet, Dimensions, KeyboardAvoidingView, Platform, TextInput, Text} from 'react-native';
 
 const FormInput = (props) => {
-    const {placeholder, title, error} = props
+    const {placeholder, name, title} = props
+    const { values, errors, handleChange, touched, handleBlur, handleSubmit} = useFormikContext()
+    
+    const value = values[name]
+    const error= errors[name]
+    const isInputTouched= touched[name]
+
     return (
         <>
         <View style={{justifyContent:"center", justifyItems:'center'}}>
             <Text style={styles.textGrey}>{title}</Text>
-            {error ? (<Text style={{color: 'red', fontSize: 12,  alignSelf:'center'}}>{error}</Text>): null}
+            {error && isInputTouched ? (<Text style={{color: 'red', fontSize: 12,  alignSelf:'center'}}>{error}</Text>): null}
         </View>
-            <TextInput {...props} placeholder={placeholder} style={styles.textInput} />
+            <TextInput 
+            {...props} 
+            placeholder={placeholder} 
+            style={styles.textInput} 
+            value = {value}
+            onChangeText = {handleChange(name)}
+            onBlur = {handleBlur(name)}
+            />
         </>
     )
 }
