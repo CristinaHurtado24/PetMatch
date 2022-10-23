@@ -22,6 +22,7 @@ import user_login from "../api/user_api";
 import FormContainer from "./FormContainer";
 import FormInput from "./FormInput";
 import { signin } from "../../utilities/auth";
+import axios from "axios";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -37,17 +38,18 @@ const initialValues = {
 };
 
 export default SingIn = ({ navigation }) => {
-  const handleLogin = async (values, formikActions) => {
-    setTimeout(async()=> {
-      console.log(values)
-      const res = await signin(values);
-      formikActions.setSubmitting(false);
-      console.log(res.success)
-  
-      if (!res.success) return console.log(res.error);
-      formikActions.resetForm();
+  const handleLogin = (email,user_password) => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/api/user/signin',
+      data: {
+        email,
+        user_password,
+      }
+    })
+    .then ((res) => {
       console.log(res);
-    },3000)
+    });
   };
 
   return (
