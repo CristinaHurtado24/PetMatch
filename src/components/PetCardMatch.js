@@ -10,7 +10,7 @@ import {
   ScrollView,
   TouchableHighlight,
 } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 const users = [
   {
     name: "Tobby",
@@ -45,12 +45,20 @@ const users = [
 ];
 
 export default PetCard = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       {users.map((u, i) => {
         return (
           <View key={i} style={styles.cardContainer}>
-            <TouchableHighlight onPress={() => Alert.alert(u.name)}>
+            <TouchableHighlight
+              onPress={() =>
+                navigation.navigate("ProfileMatch", {
+                  name: u.name,
+                  url: u.avatar,
+                })
+              }
+            >
               <Image
                 style={styles.imageStyle}
                 source={{ uri: u.avatar }}

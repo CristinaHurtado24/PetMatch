@@ -71,7 +71,7 @@ export default PetCard = () => {
                 size={50}
                 color="#1C1A19"
                 onPress={() => {
-                  Alert.alert("Inicio con Facebook");
+                  Alert.alert("Hacer match");
                 }}
               />
               <AntDesign
@@ -79,7 +79,7 @@ export default PetCard = () => {
                 size={50}
                 color="#1C1A19"
                 onPress={() => {
-                  Alert.alert("Inicio con Facebook");
+                  Alert.alert("Eliminar");
                 }}
               />
             </View>

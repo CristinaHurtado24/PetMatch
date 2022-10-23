@@ -1,22 +1,6 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ButtonGradient from "./ButtonGradient";
 import PetCard from "./PetCard";
-
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  Dimensions,
-  Button,
-  Alert,
-  BackHandler,
-} from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 

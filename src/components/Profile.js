@@ -1,50 +1,49 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ButtonGradient from "./ButtonGradient";
 
 import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Image,
   Dimensions,
-  Button,
-  Alert,
-  BackHandler,
+  ScrollView,
+  StatusBar,
 } from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native-web";
 
 const { width, height } = Dimensions.get("window");
 
 export default Profile = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
-        }}
-        style={styles.imgpic}
-      />
+    <ScrollView style={styles.containerScroll}>
+      <View style={styles.container}>
+        <Image
+          source={{
+            uri: "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+          }}
+          style={styles.imgpic}
+        />
 
-      <Text style={styles.person}>Mascota</Text>
+        <Text style={styles.person}>Mascota</Text>
 
-      <Text style={styles.textInput}>Nombre Mascota</Text>
-      <Text style={styles.textInput}>Raza</Text>
-      <Text style={styles.textInput}>Edad</Text>
-      <Text style={styles.textInput}>Sexo</Text>
+        <Text style={styles.textInput}>Nombre Mascota</Text>
+        <Text style={styles.textInput}>Raza</Text>
+        <Text style={styles.textInput}>Edad</Text>
+        <Text style={styles.textInput}>Sexo</Text>
 
-      <Text style={styles.person}>Dueño</Text>
-      <Text style={styles.textInput}>Nombre Dueño</Text>
-      <Text style={styles.textInput}>Apellido</Text>
-    </View>
+        <Text style={styles.person}>Dueño</Text>
+        <Text style={styles.textInput}>Nombre Dueño</Text>
+        <Text style={styles.textInput}>Apellido</Text>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  containerScroll: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    backgroundColor: "#fff",
+  },
   container: {
     flex: 1,
     justifyContent: "center",

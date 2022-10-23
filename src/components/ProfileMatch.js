@@ -1,22 +1,14 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ButtonGradient from "./ButtonGradient";
 
 import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Image,
   Dimensions,
-  Button,
-  Alert,
-  BackHandler,
+  StatusBar,
+  ScrollView,
 } from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native-web";
 
 const { width, height } = Dimensions.get("window");
 
@@ -24,20 +16,35 @@ export default Profile = ({ route, navigation }) => {
   const { name, url } = route.params;
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: { url },
-        }}
-        style={styles.imgpic}
-      />
-      <Text>ProfileMatch</Text>
-      <Text>{name}</Text>
-    </View>
+    <ScrollView style={styles.containerScroll}>
+      <View style={styles.container}>
+        <Image
+          source={{
+            uri: url,
+          }}
+          style={styles.imgpic}
+        />
+        <Text style={styles.person}>Mascota</Text>
+
+        <Text style={styles.textInput}>{name}</Text>
+        <Text style={styles.textInput}>Falta prop Raza</Text>
+        <Text style={styles.textInput}> Falta prop Edad</Text>
+        <Text style={styles.textInput}>Falta prop Sexo</Text>
+
+        <Text style={styles.person}>Dueño</Text>
+        <Text style={styles.textInput}>Falta prop Nombre Dueño</Text>
+        <Text style={styles.textInput}>Falta prop Apellido</Text>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  containerScroll: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    backgroundColor: "#fff",
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   imgpic: {
-    marginTop: 10,
+    marginTop: 20,
     width: 200,
     height: 200,
     marginBottom: 20,
