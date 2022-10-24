@@ -1,41 +1,172 @@
 import * as React from "react";
-
+import * as RN from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { database, auth } from "../config/fb";
+import { collection, addDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import DogDataButton from "./DogDataButton";
-import { StyleSheet, Text, View, TextInput, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Dimensions,
+  ScrollView,
+  Image,
+  Alert,
+} from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
-export default RegisterData = ({ navigation }) => {
+export default RegisterData = () => {
+  const navigation = useNavigation();
+
+  const handleCreateAccount = () => {
+    createUserWithEmailAndPassword(auth, newItem.email, newItem.password)
+      .then((userCredential) => {
+        console.log("Account created!");
+        const user = userCredential.user;
+        console.log(user);
+        navigation.navigate("SingIn");
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(error.message);
+      });
+  };
+
+  const [newItem, setNewItem] = React.useState({
+    name: "",
+    lastName: "",
+    email: "predef",
+    password: "",
+    phone: "",
+    dogName: "",
+    raza: "",
+    dogAge: "",
+    dogSex: "",
+    url: "https://s1.eestatic.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg",
+  });
+
+  const onSend = async () => {
+    await addDoc(collection(database, "products"), newItem);
+    //navigation.goBack();
+    handleCreateAccount();
+  };
+
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.container}>
+    <ScrollView style={styles.scrollContainer}>
+      <View style={styles.inputGroup}>
+        <Image
+          source={{
+            uri: "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+          }}
+          style={styles.imgpic}
+        />
         <Text style={styles.titulo}>Registro Dueño</Text>
         <Text style={styles.subTitle}>Complete los campos</Text>
 
         <Text style={styles.campos}>Nombre</Text>
+        <TextInput
+          placeholder="Rosa"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, name: text })}
+        />
 
-        <TextInput placeholder="Rosa" style={styles.textInput} />
         <Text style={styles.campos}>Apellido</Text>
-        <TextInput placeholder="Meltrozo" style={styles.textInput} />
+        <TextInput
+          placeholder="Meltrozo"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, lastName: text })}
+        />
+
         <Text style={styles.campos}>Correo</Text>
-        <TextInput placeholder="Petmatch@gmail.com" style={styles.textInput} />
+        <TextInput
+          placeholder="Petmatch@gmail.com"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, email: text })}
+        />
+
         <Text style={styles.campos}>Contraseña</Text>
-        <TextInput placeholder="1234" style={styles.textInput} />
-        <Text style={styles.campos}>Confirmar Contraseña</Text>
-        <TextInput placeholder="1234" style={styles.textInput} />
+        <TextInput
+          placeholder="1234"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, password: text })}
+        />
+
         <Text style={styles.campos}>Telefono</Text>
-        <TextInput placeholder="+58 4129993067" style={styles.textInput} />
+        <TextInput
+          placeholder="+58 4129993067"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, phone: text })}
+        />
+
+        <Text style={styles.titulo}>Registro Mascota</Text>
+        <Text style={styles.subTitle}>Complete los campos</Text>
+
+        <Text style={styles.campos}>Nombre</Text>
+        <TextInput
+          placeholder="Rosa"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, dogName: text })}
+        />
+
+        <Text style={styles.campos}>Raza</Text>
+        <TextInput
+          placeholder="Pitbull"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, raza: text })}
+        />
+
+        <Text style={styles.campos}>Edad</Text>
+        <TextInput
+          placeholder="9"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, dogAge: text })}
+        />
+
+        <Text style={styles.campos}>Sexo</Text>
+        <TextInput
+          placeholder="Macho"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, dogSex: text })}
+        />
+
+        <Text style={styles.campos}>url</Text>
+        <TextInput
+          placeholder="url"
+          style={styles.textInput}
+          onChangeText={(text) => setNewItem({ ...newItem, url: text })}
+        />
+        <RN.View>
+          <RN.Button title="Create Account" onPress={onSend} />
+        </RN.View>
+
         <DogDataButton></DogDataButton>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flex: 1,
+    padding: 35,
+    backgroundColor: "#fff",
+  },
+  inputGroup: {
+    flex: 1,
+    padding: 0,
+    marginBottom: 55,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+    alignItems: "center",
+  },
   mainContainer: {
     backgroundColor: "white",
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
   },
   container: {
     alignItems: "center",
@@ -54,9 +185,10 @@ const styles = StyleSheet.create({
   },
 
   titulo: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: "bold",
     color: "#34434D",
+    marginTop: 10,
   },
 
   subTitle: {
@@ -94,17 +226,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  imgpic: {
-    marginTop: 10,
 
-    width: 300,
-    height: 300,
-  },
   title: {
     fontWeight: "800",
     fontSize: 28,
     marginBottom: 10,
     color: "#493d8a",
     textAlign: "center",
+  },
+  imgpic: {
+    marginTop: 10,
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+    borderRadius: 70,
   },
 });

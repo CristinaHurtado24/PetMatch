@@ -24,7 +24,7 @@ export default function DogDataButton() {
     <TouchableOpacity
       style={styles.container}
       //onPress={() => navigation.navigate("Onboarding")}
-      onPress={() => navigation.navigate("DogData")}
+      onPress={() => navigation.navigate("SingIn")}
     >
       <LinearGradient
         // Button Linear Gradient

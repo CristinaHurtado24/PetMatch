@@ -1,9 +1,14 @@
 import * as React from "react";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ButtonGradient from "./ButtonGradient";
 import { AntDesign } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { database, auth } from "../config/fb";
+
 import {
   StyleSheet,
   Text,
@@ -16,11 +21,28 @@ import {
   BackHandler,
 } from "react-native";
 import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
+
 const { width, height } = Dimensions.get("window");
 
-export default SingIn = ({ navigation }) => {
+export default SingIn = () => {
   //const navigation = useNavigation();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const navigation = useNavigation();
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log("Signed in!");
+        const user = userCredential.user;
+        console.log(user);
+        navigation.navigate("Home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -40,9 +62,10 @@ export default SingIn = ({ navigation }) => {
           <TextInput
             placeholder="Petmatch@gmail.com"
             style={styles.textInput}
+            onChangeText={(text) => setEmail(text)}
           />
 
-          <TextInput placeholder="Contraseña" style={styles.textInput} />
+          <TextInput placeholder="Contraseña" style={styles.textInput} onChangeText={(text) => setPassword(text)}/>
         </View>
 
         <View style={styles.options}>
@@ -80,9 +103,12 @@ export default SingIn = ({ navigation }) => {
             onPress={() => Alert.alert("Poner ruta olvide contraseña")}
           />
         </View>
-        <View style={styles.container}>
-          <ButtonGradient />
+
+        <View>
+          <Button title="Sign In" onPress={handleSignIn} />
         </View>
+
+        <ButtonGradient />
         <View style={styles.buttontext}>
           <Button
             title="No tengo cuenta"
