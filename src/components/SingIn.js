@@ -19,10 +19,11 @@ import {
   BackHandler,
   ScrollView,
 } from "react-native";
-import user_login from "../api/user_api";
 import FormContainer from "./FormContainer";
 import FormInput from "./FormInput";
-import { signin } from "../../utilities/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseConfig } from "../../firebase-config";
+import { initializeApp } from "@firebase/app";
 
 //import axios from "axios";
 
@@ -39,10 +40,37 @@ const initialValues = {
   user_password: "",
 };
 
-export default SingIn = ({ navigation }) => {
-  const {signInWithGoogle} = UseAuth();
+function LoginScreen() {
+  const [email, setEmail] = useState('')
+  const [user_password, setPassword] = useState('')
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-  // console.log(user);
+  const handleCreateaccount = () => {
+    createUserWithEmailAndPassword(auth, email, user_password).then(
+      ()=>{
+        console.log('Acount created')
+        const user = userCredential.user;
+        console.log(user)
+      }
+    ).catch(error=>{
+      console.log(error)
+    })
+  };
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, user_password)
+      .then(() => {
+        console.log("Sign In!");
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -64,7 +92,7 @@ export default SingIn = ({ navigation }) => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            //onSubmit={}
+            onSubmit={handleSignIn}
           >
             {({ errors, values, handleSubmit, handleChange }) => {
               return (
@@ -74,7 +102,7 @@ export default SingIn = ({ navigation }) => {
                     title="Correo Electrónico"
                     placeholder="petmatch@gmail.com"
                     name="email"
-                    onChange={handleChange("email")}
+                    onChangeText={(text) => setEmail(text)}
                   />
                   <FormInput
                     autoCapitalize="none"
@@ -82,16 +110,16 @@ export default SingIn = ({ navigation }) => {
                     title="Contraseña"
                     placeholder="********"
                     name="user_password"
-                    onChange={handleChange("user_password")}
+                    onChangeText={(text) => setPassword(text)}
                   />
-                  <ButtonGradient title="login" onPress={signInWithGoogle} />
+                  <ButtonGradient title="login" onPress={handleSubmit} />
                 </>
               );
             }}
           </Formik>
         </FormContainer>
 
-        {/* <View style={styles.options}>
+        <View style={styles.options}>
           <AntDesign
             name="twitter"
             size={40}
@@ -116,7 +144,7 @@ export default SingIn = ({ navigation }) => {
               Alert.alert("Inicio con Facebook");
             }}
           />
-        </View> */}
+        </View>
         <View style={styles.buttontext}>
           <Button
             color={"grey"}
@@ -136,6 +164,27 @@ export default SingIn = ({ navigation }) => {
       </View>
     </KeyboardAwareScrollView>
   );
+}
+
+export default SingIn = ({ navigation }) => {
+  //const {signInWithGoogle} = UseAuth();
+  const auth = getAuth();
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+
+
+  // console.log(user);
+  return (
+    <LoginScreen></LoginScreen>)
 };
 
 const styles = StyleSheet.create({
