@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "react-router-native";
+import RegisterData from "./RegisterData";
 
-export default function RegisterOwner() {
+export default function RegisterOwner({navigation}) {
   const { width, height } = useWindowDimensions();
   return (
     <View style={[styles.container, width, height]}>

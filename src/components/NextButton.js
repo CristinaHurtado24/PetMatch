@@ -1,14 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SingIn from "./SingIn";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default NextButton = () => {
-  const navigation = useNavigation();
+export default NextButton = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.button}>
@@ -24,7 +18,7 @@ export default NextButton = () => {
           <Button
             onPress={() => navigation.navigate("SingIn")}
             title="Inicia Sesión"
-            color="#941DE8"
+            color="#493d8a"
           />
         </View>
       </View>
@@ -39,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#941DE8",
+    backgroundColor: "#493d8a",
     borderRadius: 6,
   },
   option: {
@@ -48,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button2: {
-    color: "#941DE8",
+    color: "#493d8a",
   },
   text: {
     fontSize: 17,
