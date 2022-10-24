@@ -76,14 +76,14 @@ export default RegisterData = () => {
 
           <Text style={styles.campos}>Nombre</Text>
           <TextInput
-            placeholder="Rosa"
+            placeholder="Pet"
             style={styles.textInput}
             onChangeText={(text) => setNewItem({ ...newItem, name: text })}
           />
 
           <Text style={styles.campos}>Apellido</Text>
           <TextInput
-            placeholder="Meltrozo"
+            placeholder="Match"
             style={styles.textInput}
             onChangeText={(text) => setNewItem({ ...newItem, lastName: text })}
           />
@@ -97,7 +97,7 @@ export default RegisterData = () => {
 
           <Text style={styles.campos}>Contraseña</Text>
           <TextInput
-            placeholder="1234"
+            placeholder="****"
             style={styles.textInput}
             onChangeText={(text) => setNewItem({ ...newItem, password: text })}
           />
@@ -114,7 +114,7 @@ export default RegisterData = () => {
 
           <Text style={styles.campos}>Nombre</Text>
           <TextInput
-            placeholder="Rosa"
+            placeholder="Luna"
             style={styles.textInput}
             onChangeText={(text) => setNewItem({ ...newItem, dogName: text })}
           />
@@ -135,7 +135,7 @@ export default RegisterData = () => {
 
           <Text style={styles.campos}>Sexo</Text>
           <TextInput
-            placeholder="Macho"
+            placeholder="Hembra"
             style={styles.textInput}
             onChangeText={(text) => setNewItem({ ...newItem, dogSex: text })}
           />

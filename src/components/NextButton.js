@@ -1,8 +1,11 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 
-export default NextButton = ({navigation}) => {
+export default NextButton = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.button}>
