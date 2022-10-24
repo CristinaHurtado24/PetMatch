@@ -13,7 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "react-router-native";
 import RegisterData from "./RegisterData";
 
-export default function RegisterOwner({navigation}) {
+export default function RegisterOwner({ navigation }) {
   const { width, height } = useWindowDimensions();
   return (
     <View style={[styles.container, width, height]}>
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 64,
     fontSize: 18,
     marginTop: 30,
-    marginBottom:30
+    marginBottom: 30,
   },
   button: {
     backgroundColor: "#941DE8",
     borderRadius: 10,
     marginTop: 15,
     width: 300,
-    alignSelf:'center'
+    alignSelf: "center",
   },
   options: {
     flexDirection: "row",
