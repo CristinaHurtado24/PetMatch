@@ -105,7 +105,7 @@ export default SingIn = () => {
           <Button title="Sign In" onPress={handleSignIn} />
         </View>
 
-        <ButtonGradient />
+        <ButtonGradient values={(handleSignIn, auth, email, password)} />
         <View style={styles.buttontext}>
           <Button
             title="No tengo cuenta"

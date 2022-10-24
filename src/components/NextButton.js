@@ -1,10 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SingIn from "./SingIn";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export default NextButton = () => {
