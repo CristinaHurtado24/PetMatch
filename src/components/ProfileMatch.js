@@ -13,7 +13,19 @@ import {
 const { width, height } = Dimensions.get("window");
 
 export default Profile = ({ route, navigation }) => {
-  const { name, url } = route.params;
+  const {
+    id,
+    dogName,
+    url,
+    email,
+    password,
+    name,
+    lastName,
+    phone,
+    raza,
+    dogAge,
+    dogSex,
+  } = route.params;
 
   return (
     <ScrollView style={styles.containerScroll}>
@@ -26,14 +38,15 @@ export default Profile = ({ route, navigation }) => {
         />
         <Text style={styles.person}>Mascota</Text>
 
-        <Text style={styles.textInput}>{name}</Text>
-        <Text style={styles.textInput}>Falta prop Raza</Text>
-        <Text style={styles.textInput}> Falta prop Edad</Text>
-        <Text style={styles.textInput}>Falta prop Sexo</Text>
+        <Text style={styles.textInput}>{dogName}</Text>
+        <Text style={styles.textInput}>{raza}</Text>
+        <Text style={styles.textInput}> {dogAge}</Text>
+        <Text style={styles.textInput}>{dogSex}</Text>
 
         <Text style={styles.person}>Dueño</Text>
-        <Text style={styles.textInput}>Falta prop Nombre Dueño</Text>
-        <Text style={styles.textInput}>Falta prop Apellido</Text>
+        <Text style={styles.textInput}>{name}</Text>
+        <Text style={styles.textInput}>{lastName}</Text>
+        <Text style={styles.textInput}>{phone}</Text>
       </View>
     </ScrollView>
   );

@@ -26,6 +26,7 @@
     "expo": "^46.0.15",
     "expo-linear-gradient": "~11.4.0",
     "expo-status-bar": "~1.4.0",
+    "firebase": "9.6.7",
     "mongoose": "^6.6.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
