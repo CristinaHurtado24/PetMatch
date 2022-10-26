@@ -62,11 +62,11 @@ export default PetCard = ({
           }}
         />
         <AntDesign
-          name="close"
+          name="infocirlceo"
           size={50}
           color="#1C1A19"
           onPress={() => {
-            Alert.alert("Eliminar");
+            Alert.alert(phone);
           }}
         />
       </View>
