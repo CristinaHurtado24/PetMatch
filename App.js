@@ -43,7 +43,7 @@ function Home() {
           title: "Discover",
           headerBackVisible: false,
           tabBarIcon: (tabInfo) => (
-            <AntDesign name="home" size={35} color="#1C1A19" />
+            <AntDesign name="home" size={35} color="#941DE8" />
           ),
         }}
       />

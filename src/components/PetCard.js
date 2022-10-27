@@ -30,9 +30,25 @@ export default PetCard = ({
 }) => {
   const navigation = useNavigation();
   return (
+    <View style={styles.all}>
     <View style={styles.cardContainer}>
-      <TouchableHighlight
-        onPress={() =>
+        <Image style={styles.imageStyle} source={{ uri: url }}></Image>
+      <Text style={styles.name}>{dogName}</Text>
+      <Text style={styles.raza}>{raza}</Text>
+      <View style={styles.icons}>
+        <AntDesign
+          name="heart"
+          size={50}
+          color="#941DE8"
+          onPress={() => {
+            Alert.alert("Hacer match");
+          }}
+        />
+        <AntDesign
+          name="infocirlceo"
+          size={50}
+          color="#941DE8"
+          onPress={() =>
           navigation.navigate("ProfileMatch", {
             dogName: dogName,
             url: url,
@@ -48,28 +64,9 @@ export default PetCard = ({
             dogSex: dogSex,
           })
         }
-      >
-        <Image style={styles.imageStyle} source={{ uri: url }}></Image>
-      </TouchableHighlight>
-      <Text style={styles.name}>{dogName}</Text>
-      <View style={styles.icons}>
-        <AntDesign
-          name="heart"
-          size={50}
-          color="#1C1A19"
-          onPress={() => {
-            Alert.alert("Hacer match");
-          }}
-        />
-        <AntDesign
-          name="infocirlceo"
-          size={50}
-          color="#1C1A19"
-          onPress={() => {
-            Alert.alert(phone);
-          }}
         />
       </View>
+    </View>
     </View>
   );
 };
@@ -78,9 +75,13 @@ const deviceWidth = Math.round(Dimensions.get("window").width);
 const radius = 20;
 
 const styles = StyleSheet.create({
+  all: {
+    alignSelf: 'center',
+  },
+
   cardContainer: {
-    width: deviceWidth - 20,
-    height: 500,
+    width: deviceWidth - 70,
+    height: 600,
     backgroundColor: "#fff",
     borderRadius: 20,
     shadowColor: "#Grey",
@@ -88,18 +89,20 @@ const styles = StyleSheet.create({
       width: 5,
       height: 5,
     },
-    shadowOpacity: 0.7,
+    shadowOpacity: 0.3,
     elevation: 2,
     shadowRadius: 5,
-    marginBottom: 15,
-    marginTop: 15,
+    marginBottom: 30,
+    marginTop: 30,
     marginHorizontal: 10,
+    alignself: 'center',
   },
   imageStyle: {
-    height: 370,
-    width: deviceWidth - 20,
+    height: 450,
+    width: deviceWidth - 70,
     borderTopRightRadius: radius,
     borderTopLeftRadius: radius,
+    resizeMode: 'cover',
   },
   title: {
     fontSize: 40,
@@ -110,6 +113,12 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 40,
     fontWeight: "600",
+    alignSelf: "center",
+  },
+
+  raza: {
+    fontSize: 20,
+    fontWeight: "400",
     alignSelf: "center",
   },
 
