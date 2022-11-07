@@ -41,6 +41,17 @@ export default Profile = ({ navigation }) => {
   }, []);
 
   console.log(products);
+
+  const person=()=>{
+    const helper=[];
+    for (let index = 0; index < products.length; index++) {
+      const element = products[index];
+      if (element.email===) {
+        
+      }
+    }
+  }
+
   return (
     <ScrollView style={styles.containerScroll}>
       <View style={styles.container}>
