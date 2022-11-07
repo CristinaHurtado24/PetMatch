@@ -15,6 +15,8 @@ const { width, height } = Dimensions.get("window");
 
 export default Profile = ({ navigation }) => {
   const [products, setProducts] = React.useState([]);
+  var userprof = "";
+  const [productsA, setProductsA] = React.useState([]);
 
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
@@ -42,13 +44,17 @@ export default Profile = ({ navigation }) => {
 
   console.log(products);
 
-  const person=()=>{
-    const helper=[];
-    for (let index = 0; index < products.length; index++) {
-      const element = products[index];
-      if (element.email===) {
-        
-      }
+  for (let index = 0; index < products.length; index++) {
+    const element = products[index];
+    console.log("entra");
+    console.log(element);
+    if (element.email === "Alevilla@gmail.com") {
+      console.log("**************");
+      console.log(element);
+      console.log("**************");
+      var userprof = element;
+      console.log(userprof);
+      //setProductsA(element);
     }
   }
 
@@ -57,21 +63,21 @@ export default Profile = ({ navigation }) => {
       <View style={styles.container}>
         <Image
           source={{
-            uri: "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+            uri: userprof.url,
           }}
           style={styles.imgpic}
         />
 
         <Text style={styles.person}>Mascota</Text>
 
-        <Text style={styles.textInput}>Nombre Mascota</Text>
-        <Text style={styles.textInput}>Raza</Text>
-        <Text style={styles.textInput}>Edad</Text>
-        <Text style={styles.textInput}>Sexo</Text>
+        <Text style={styles.textInput}>{userprof.dogName}</Text>
+        <Text style={styles.textInput}>{userprof.raza}</Text>
+        <Text style={styles.textInput}>{userprof.dogAge} años</Text>
+        <Text style={styles.textInput}>{userprof.dogSex}</Text>
 
         <Text style={styles.person}>Dueño</Text>
-        <Text style={styles.textInput}>Nombre Dueño</Text>
-        <Text style={styles.textInput}>Apellido</Text>
+        <Text style={styles.textInput}>{userprof.name}</Text>
+        <Text style={styles.textInput}>{userprof.lastName}</Text>
       </View>
     </ScrollView>
   );
