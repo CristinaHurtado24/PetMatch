@@ -1,5 +1,6 @@
 import * as React from "react";
-
+import { database } from "../config/fb";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import {
   StyleSheet,
   Text,
@@ -13,6 +14,33 @@ import {
 const { width, height } = Dimensions.get("window");
 
 export default Profile = ({ navigation }) => {
+  const [products, setProducts] = React.useState([]);
+
+  React.useEffect(() => {
+    const collectionRef = collection(database, "products");
+    const q = query(collectionRef, orderBy("name", "desc"));
+
+    const unsuscribe = onSnapshot(q, (querySnapshot) => {
+      setProducts(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          email: doc.data().email,
+          password: doc.data().password,
+          name: doc.data().name,
+          lastName: doc.data().lastName,
+          dogName: doc.data().dogName,
+          url: doc.data().url,
+          phone: doc.data().phone,
+          raza: doc.data().raza,
+          dogAge: doc.data().dogAge,
+          dogSex: doc.data().dogSex,
+        }))
+      );
+    });
+    return unsuscribe;
+  }, []);
+
+  console.log(products);
   return (
     <ScrollView style={styles.containerScroll}>
       <View style={styles.container}>

@@ -47,7 +47,7 @@ function Home() {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Match"
         component={Match}
         options={{
@@ -58,8 +58,8 @@ function Home() {
             <AntDesign name="hearto" size={35} color="#1C1A19" />
           ),
         }}
-      /> */}
-      {/* <Tab.Screen
+      />
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
@@ -70,7 +70,7 @@ function Home() {
             <AntDesign name="user" size={35} color="#1C1A19" />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 }
