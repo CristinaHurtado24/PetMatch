@@ -10,10 +10,12 @@ import {
   ScrollView,
   StatusBar,
 } from "react-native";
-
+import { useRoute } from "@react-navigation/native";
+import { Routes } from "react-router-native";
 const { width, height } = Dimensions.get("window");
 
 export default Profile = ({ navigation }) => {
+  const route = useRoute();
   const [products, setProducts] = React.useState([]);
   var userprof = "";
   const [productsA, setProductsA] = React.useState([]);
@@ -50,7 +52,7 @@ export default Profile = ({ navigation }) => {
     console.log(element);
     if (element.email === "Alevilla@gmail.com") {
       console.log("**************");
-      console.log(element);
+      console.log(route.params.userEmail);
       console.log("**************");
       var userprof = element;
       console.log(userprof);

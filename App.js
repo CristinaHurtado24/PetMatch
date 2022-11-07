@@ -19,10 +19,12 @@ import MatchDiscover from "./src/components/MatchDiscover.js";
 
 import { AntDesign } from "@expo/vector-icons";
 
+import { useRoute } from "@react-navigation/native";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function Home() {
+  const route = useRoute();
   return (
     <Tab.Navigator
       tabBarOptions={{ showIcon: true, showLabel: false }}
@@ -70,6 +72,7 @@ function Home() {
             <AntDesign name="user" size={35} color="#1C1A19" />
           ),
         }}
+        initialParams={{ userEmail: route.params.userEmail }}
       />
     </Tab.Navigator>
   );
