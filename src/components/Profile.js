@@ -50,7 +50,7 @@ export default Profile = ({ navigation }) => {
     const element = products[index];
     console.log("entra");
     console.log(element);
-    if (element.email === "Alevilla@gmail.com") {
+    if (element.email === route.params.userEmail) {
       console.log("**************");
       console.log(route.params.userEmail);
       console.log("**************");

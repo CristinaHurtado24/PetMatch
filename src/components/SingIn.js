@@ -38,7 +38,7 @@ export default SingIn = () => {
         console.log("Signed in!");
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate("Home");
+        navigation.navigate("Home", { userEmail: email });
       })
       .catch((error) => {
         console.log(error);
