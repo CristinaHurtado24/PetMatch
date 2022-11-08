@@ -49,6 +49,7 @@ export default RegisterData = () => {
     dogAge: "",
     dogSex: "",
     url: "https://s1.eestatic.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg",
+    match: [],
   });
 
   const onSend = async () => {
