@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as RN from "react-native";
 import { database } from "../config/fb";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { AntDesign } from "@expo/vector-icons";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import {
   View,
   Image,
@@ -14,6 +14,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 export default PetCard = ({
   id,
@@ -27,7 +28,69 @@ export default PetCard = ({
   dogAge,
   dogSex,
   url,
+  match,
 }) => {
+  const route = useRoute();
+            const [products, setProducts] = React.useState([]);
+            var userprof = "";
+            const [productsA, setProductsA] = React.useState([]);
+
+  React.useEffect(() => {
+    const collectionRef = collection(database, "products");
+    const q = query(collectionRef, orderBy("name", "desc"));
+
+    const unsuscribe = onSnapshot(q, (querySnapshot) => {
+      setProducts(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          email: doc.data().email,
+          password: doc.data().password,
+          name: doc.data().name,
+          lastName: doc.data().lastName,
+          dogName: doc.data().dogName,
+          url: doc.data().url,
+          phone: doc.data().phone,
+          raza: doc.data().raza,
+          dogAge: doc.data().dogAge,
+          dogSex: doc.data().dogSex,
+          match: doc.data().match,
+        }))
+      );
+    });
+    return unsuscribe;
+  }, []);
+
+  console.log(products);
+
+  for (let index = 0; index < products.length; index++) {
+    const element = products[index];
+    console.log("entra");
+    console.log(element);
+    if (element.email === route.params.userEmail) {
+      console.log("**************");
+      console.log(route.params.userEmail);
+      console.log("**************");
+      var userprof = element;
+      console.log(userprof);
+      //setProductsA(element);
+    }
+  }
+
+
+  function buscar(email) {
+    for (let index = 0; index < products.length; index++) {
+      const elements = products[index];
+      //console.log("entra");
+      //console.log(elements);
+      if (email === elements.email) {
+        var userprofmatch = elements;
+        console.log(userprofmatch);
+        //setProductsA(element);
+        userprofmatch.match.push(userprof)
+        console.log(userprofmatch)
+      }
+    }
+  }
   const navigation = useNavigation();
   return (
     <View style={styles.all}>
@@ -42,6 +105,11 @@ export default PetCard = ({
           color="#941DE8"
           onPress={() => {
             Alert.alert("Hacer match");
+            console.log(email);
+            buscar(email);
+            //match.push(userprof);
+            //console.log(match)
+            //{onSend}
           }}
         />
         <AntDesign

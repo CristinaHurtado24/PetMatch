@@ -48,6 +48,7 @@ function Home() {
             <AntDesign name="home" size={35} color="#941DE8" />
           ),
         }}
+        initialParams={{ userEmail: route.params.userEmail }}
       />
       <Tab.Screen
         name="Match"
