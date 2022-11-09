@@ -38,7 +38,23 @@ export default RegisterData = () => {
       });
   };
 
+  const register = async () => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, newItem.email, newItem.password);
+      const user = res.user;
+      //campos que tendrá la cuenta en sí
+      await addDoc(collection(database, "users"), {
+        uid: user.uid
+      });
+      return navigation.navigate("SingIn");
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  };
+
   const [newItem, setNewItem] = React.useState({
+    id: "",
     name: "",
     lastName: "",
     email: "predef",
@@ -49,12 +65,13 @@ export default RegisterData = () => {
     dogAge: "",
     dogSex: "",
     url: "https://s1.eestatic.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg",
+    requests: "[]"
   });
 
   const onSend = async () => {
-    await addDoc(collection(database, "products"), newItem);
+    //await addDoc(collection(database, "users"), newItem);
     //navigation.goBack();
-    handleCreateAccount();
+    register(newItem);
   };
 
   return (

@@ -127,7 +127,7 @@ export default Match = () => {
       {productsA.length != 0 ? (
         <ScrollView>
           {productsA.map((product) => (
-            <PetCard key={product.id} {...product} />
+            <PetCard key={product.id} {...product} initialParams={{ userEmail: route.params.userEmail }}/>
           ))}
         </ScrollView>
       ) : (
