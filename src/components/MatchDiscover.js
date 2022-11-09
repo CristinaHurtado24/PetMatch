@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Alert}from "react-native";
+import { Alert } from "react-native";
 import { database } from "../config/fb";
 import { useNavigation } from "@react-navigation/native";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -32,7 +32,7 @@ export default Match = () => {
   };
   const onChangeSearch = (query) => {
     setSearchQuery(query);
-    console.log(searchQuery)
+    console.log(searchQuery);
     const helper = [];
     if (searchQuery != "" && searchFilter != "") {
       if (searchFilter == 1) {
@@ -46,9 +46,10 @@ export default Match = () => {
       } else {
         //Busca por ciudad
       }
-      setProductsA(helper)
+      setProductsA(helper);
     } else if (searchFilter == "") {
-      Alert.alert("Seleccione un filtro");}
+      Alert.alert("Seleccione un filtro");
+    }
   };
 
   React.useEffect(() => {
@@ -123,19 +124,19 @@ export default Match = () => {
           //reset textInput Value with true and false state
         />
       </View>
-      {productsA.length!=0?
-         <ScrollView>
+      {productsA.length != 0 ? (
+        <ScrollView>
           {productsA.map((product) => (
             <PetCard key={product.id} {...product} initialParams={{ userEmail: route.params.userEmail }}/>
           ))}
         </ScrollView>
-      :
+      ) : (
         <ScrollView>
           {products.map((product) => (
             <PetCard key={product.id} {...product} />
           ))}
         </ScrollView>
-      }
+      )}
     </>
   );
 };

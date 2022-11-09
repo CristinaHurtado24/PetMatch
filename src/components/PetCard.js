@@ -1,8 +1,17 @@
 import * as React from "react";
 import * as RN from "react-native";
 import { database } from "../config/fb";
+
 import { AntDesign } from "@expo/vector-icons";
-import { collection, onSnapshot, orderBy, query, updateDoc, doc } from "firebase/firestore";
+
+import {
+  onSnapshot,
+  orderBy,
+  query,
+  updateDoc,
+  doc,
+  collection,
+} from "firebase/firestore";
 import {
   View,
   Image,
@@ -32,9 +41,9 @@ export default PetCard = ({
   requests,
 }) => {
   const route = useRoute();
-            const [products, setProducts] = React.useState([]);
-            var userprof = "";
-            const [productsA, setProductsA] = React.useState([]);
+  const [products, setProducts] = React.useState([]);
+  var userprof = "";
+  const [productsA, setProductsA] = React.useState([]);
 
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
@@ -78,7 +87,6 @@ export default PetCard = ({
     }
   }
 
-
   function buscar(email) {
     for (let index = 0; index < products.length; index++) {
       const elements = products[index];
@@ -88,21 +96,31 @@ export default PetCard = ({
         var userprofmatch = elements;
         console.log(userprofmatch);
         //setProductsA(element);
-        userprofmatch.requests.push(userprof.email)
-        console.log(userprofmatch)
+        userprofmatch.requests.push(userprof.email);
+        console.log(userprofmatch);
         //ref.set(userprofmatch)
-        console.log("jjjjjjjjjjj")
+        console.log("jjjjjjjjjjj");
         //console.log(database)
         //const uniqueId = userprofmatch.id;
         //await database.collection("products").doc(uniqueId).update()
       }
-    } return userprofmatch
+    }
+    return userprofmatch;
   }
 
   const navigation = useNavigation();
+  const collectionRef = collection(database, "products");
+  const onSend = async () => {
+    console.log("pasaaaaaaa");
+    await updateDoc(collection(database, "products", "7UVpezxDSSISWRebNrCr"), {
+      phone: "123",
+    });
+    //navigation.goBack();
+  };
+
   return (
     <View style={styles.all}>
-    <View style={styles.cardContainer}>
+      <View style={styles.cardContainer}>
         <Image style={styles.imageStyle} source={{ uri: url }}></Image>
       <Text style={styles.name}>{dogName}</Text>
       <Text style={styles.raza}>{raza}</Text>
@@ -120,9 +138,7 @@ export default PetCard = ({
             //{onSend}
             actualizar(a);
             async function actualizar(a) {
-                const uniqueId = doc.uid;
-                console.log("kkkkkkkkkkk")
-                console.log(doc.uid)
+                const uniqueId = "7UVpezxDSSISWRebNrCr";
                 const usuariosRef = doc(collection(database, "products"), uniqueId)
                 await updateDoc(usuariosRef, { requests: a.requests });
                 //console.log(a.id)
@@ -143,32 +159,32 @@ export default PetCard = ({
                 //     requests: a.requests,
                 //   }
                 //)
+              }
+            }}
+          />
+          <AntDesign
+            name="infocirlceo"
+            size={50}
+            color="#941DE8"
+            onPress={() =>
+              navigation.navigate("ProfileMatch", {
+                dogName: dogName,
+                url: url,
+                email: email,
+                password: password,
+                name: name,
+                lastName: lastName,
+                dogName: dogName,
+                url: url,
+                phone: phone,
+                raza: raza,
+                dogAge: dogAge,
+                dogSex: dogSex,
+              })
             }
-          }}
-        />
-        <AntDesign
-          name="infocirlceo"
-          size={50}
-          color="#941DE8"
-          onPress={() =>
-          navigation.navigate("ProfileMatch", {
-            dogName: dogName,
-            url: url,
-            email: email,
-            password: password,
-            name: name,
-            lastName: lastName,
-            dogName: dogName,
-            url: url,
-            phone: phone,
-            raza: raza,
-            dogAge: dogAge,
-            dogSex: dogSex,
-          })
-        }
-        />
+          />
+        </View>
       </View>
-    </View>
     </View>
   );
 };
@@ -178,7 +194,7 @@ const radius = 20;
 
 const styles = StyleSheet.create({
   all: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 
   cardContainer: {
@@ -197,14 +213,14 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 30,
     marginHorizontal: 10,
-    alignself: 'center',
+    alignself: "center",
   },
   imageStyle: {
     height: 450,
     width: deviceWidth - 70,
     borderTopRightRadius: radius,
     borderTopLeftRadius: radius,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   title: {
     fontSize: 40,
