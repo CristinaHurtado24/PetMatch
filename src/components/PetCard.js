@@ -43,7 +43,7 @@ export default PetCard = ({
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       setProducts(
         querySnapshot.docs.map((doc) => ({
-          id: doc.uid,
+          id: doc.id,
           email: doc.data().email,
           password: doc.data().password,
           name: doc.data().name,
@@ -120,7 +120,9 @@ export default PetCard = ({
             //{onSend}
             actualizar(a);
             async function actualizar(a) {
-                const uniqueId = "Ogh4iGMdyF3904ZhA04O";
+                const uniqueId = doc.uid;
+                console.log("kkkkkkkkkkk")
+                console.log(doc.uid)
                 const usuariosRef = doc(collection(database, "products"), uniqueId)
                 await updateDoc(usuariosRef, { requests: a.requests });
                 //console.log(a.id)

@@ -2,7 +2,7 @@ import * as React from "react";
 import * as RN from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { database, auth } from "../config/fb";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc} from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import DogDataButton from "./DogDataButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -43,8 +43,21 @@ export default RegisterData = () => {
       const res = await createUserWithEmailAndPassword(auth, newItem.email, newItem.password);
       const user = res.user;
       //campos que tendrá la cuenta en sí
-      await addDoc(collection(database, "users"), {
-        uid: user.uid
+      await setDoc(doc(database, "users", user.uid), {
+        uid: user.uid,
+        email: newItem.email,
+        password: newItem.password,
+        name: newItem.name,
+        lastName: newItem.lastName,
+        dogName: newItem.dogName,
+        url: newItem.url,
+        phone: newItem.phone,
+        raza: newItem.raza,
+        dogAge: newItem.dogAge,
+        dogSex: newItem.dogSex,
+          //match: doc.data().match,
+        requests: [],
+        match: [],
       });
       return navigation.navigate("SingIn");
     } catch (err) {
