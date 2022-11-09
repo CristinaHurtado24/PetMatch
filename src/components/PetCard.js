@@ -1,23 +1,16 @@
 import * as React from "react";
 import * as RN from "react-native";
 import { database } from "../config/fb";
-import {
-  deleteDoc,
-  doc,
-  collection,
-  Firestore,
-  updateDoc,
-} from "firebase/firestore";
-import { AntDesign } from "@expo/vector-icons";
 
 import { AntDesign } from "@expo/vector-icons";
+
 import {
-  collection,
   onSnapshot,
   orderBy,
   query,
   updateDoc,
   doc,
+  collection,
 } from "firebase/firestore";
 import {
   View,

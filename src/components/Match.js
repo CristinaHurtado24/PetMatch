@@ -56,31 +56,52 @@ export default Match = ({ navigation }) => {
     return unsuscribe;
   }, []);
 
-  console.log(products);
+  //console.log(products);
   console.log(route.params.userEmail);
 
   for (let index = 0; index < products.length; index++) {
     const element = products[index];
-    for (let index = 0; index < element.requests.length; index++) {
-      const element2 = element.requests[index];
-      if (element2 === route.params.userEmail) {
-        console.log("se encontro perra");
-        console.log("*******");
-        console.log("*******");
-        console.log(element);
-        helper.push(element);
+    if (element.email === route.params.userEmail) {
+      for (let index = 0; index < element.requests.length; index++) {
+        const element2 = element.requests[index];
+        console.log("+++++++++++");
+        //console.log(element2);
+        //helper.push(element2);
 
-        console.log("*******");
-        console.log("*******");
+        console.log("+++++++++++");
+        for (let index = 0; index < products.length; index++) {
+          const element3 = products[index];
+          if (element3.email === element2) {
+            helper.push(element3);
+          }
+        }
       }
+      console.log("&&&&&&&&&&&&&&");
+      console.log("&&&&&&&&&&&&&&");
+      console.log("&&&&&&&&&&&&&&");
+      console.log("&&&&&&&&&&&&&&");
+      console.log(helper);
+      console.log("&&&&&&&&&&&&&&");
+      console.log("&&&&&&&&&&&&&&");
+      console.log("&&&&&&&&&&&&&&");
+      console.log("&&&&&&&&&&&&&&");
     }
+
+    // for (let index = 0; index < element.requests.length; index++) {
+    //   const element2 = element.requests[index];
+    //   if (element2 === route.params.userEmail) {
+    //     console.log("se encontro perra");
+    //     console.log("*******");
+    //     console.log("*******");
+    //     console.log(element);
+    //     helper.push(element);
+
+    //     console.log("*******");
+    //     console.log("*******");
+    //   }
+    // }
   }
   //setProductsA(helper);
-  console.log("*******");
-  console.log("*******");
-  console.log(helper);
-  console.log("*******");
-  console.log("*******");
 
   return (
     <ScrollView>
