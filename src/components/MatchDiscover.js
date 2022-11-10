@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Searchbar } from "react-native-paper";
 import SearchableDropdown from "react-native-searchable-dropdown";
-
+import { useRoute } from "@react-navigation/native";
 import PetCard from "./PetCard";
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
 
@@ -19,6 +19,7 @@ const items = [
 ];
 export default Match = () => {
   const navigation = useNavigation();
+  const route = useRoute();
 
   const [products, setProducts] = React.useState([]);
   const [productsA, setProductsA] = React.useState([]);
@@ -59,7 +60,7 @@ export default Match = () => {
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       setProducts(
         querySnapshot.docs.map((doc) => ({
-          id: doc.id,
+          //id: doc.id,
           email: doc.data().email,
           password: doc.data().password,
           name: doc.data().name,
@@ -127,7 +128,11 @@ export default Match = () => {
       {productsA.length != 0 ? (
         <ScrollView>
           {productsA.map((product) => (
-            <PetCard key={product.id} {...product} initialParams={{ userEmail: route.params.userEmail }}/>
+            <PetCard
+              key={product.id}
+              {...product}
+              initialParams={{ userEmail: route.params.userEmail }}
+            />
           ))}
         </ScrollView>
       ) : (
