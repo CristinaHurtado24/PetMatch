@@ -2,7 +2,7 @@ import * as React from "react";
 import * as RN from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { database, auth } from "../config/fb";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc} from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import DogDataButton from "./DogDataButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -18,6 +18,8 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
+import { Button } from "react-native-paper";
+import { async } from "@firebase/util";
 
 const { width, height } = Dimensions.get("window");
 
@@ -43,8 +45,22 @@ export default RegisterData = () => {
       const res = await createUserWithEmailAndPassword(auth, newItem.email, newItem.password);
       const user = res.user;
       //campos que tendrá la cuenta en sí
-      await addDoc(collection(database, "users"), {
-        uid: user.uid
+      await setDoc(doc(database, "products", user.uid), {
+        uid: user.uid,
+        email: newItem.email,
+        password: newItem.password,
+        name: newItem.name,
+        lastName: newItem.lastName,
+        dogName: newItem.dogName,
+        url: newItem.url,
+        phone: newItem.phone,
+        raza: newItem.raza,
+        dogAge: newItem.dogAge,
+        dogSex: newItem.dogSex,
+          //match: doc.data().match,
+        requests: [],
+        match: [],
+        image: newItem.image,
       });
       return navigation.navigate("SingIn");
     } catch (err) {
@@ -65,7 +81,8 @@ export default RegisterData = () => {
     dogAge: "",
     dogSex: "",
     url: "https://s1.eestatic.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg",
-    requests: "[]"
+    requests: "[]",
+    image: "",
   });
 
   const onSend = async () => {
@@ -163,6 +180,27 @@ export default RegisterData = () => {
             style={styles.textInput}
             onChangeText={(text) => setNewItem({ ...newItem, url: text })}
           />
+
+          {/* <View>
+            {checkImage(newItem)}
+            <TouchableOpacity
+                onPress={() => getPermissionAsync()}
+            style={styles.container4}
+
+            >
+            <LinearGradient
+                // Button Linear Gradient
+                colors={["#941DE8", "#941DE8"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.button}
+              >
+                <Text style={styles.text}>Selecciona una imagen de tu mascota</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+
+          </View> */}
 
           <View>
             <TouchableOpacity
@@ -298,7 +336,13 @@ const styles = StyleSheet.create({
   container3: {
     alignItems: "center",
     width: 200,
-    marginTop: 15,
+    marginTop: 30,
+  },
+
+  container4: {
+    alignItems: "center",
+    width: 400,
+    marginTop: 30,
   },
 
   button2: {
