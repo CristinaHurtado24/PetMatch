@@ -52,7 +52,7 @@ export default PetCard = ({
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       setProducts(
         querySnapshot.docs.map((doc) => ({
-          id: doc.id,
+          uid: doc.data().uid,
           email: doc.data().email,
           password: doc.data().password,
           name: doc.data().name,
@@ -130,7 +130,7 @@ export default PetCard = ({
           size={50}
           color="#941DE8"
           onPress={() => {
-            Alert.alert("Hacer match");
+            Alert.alert("Enviada la solicitud");
             console.log(email);
             const a = buscar(email);
             //match.push(userprof);
@@ -138,7 +138,7 @@ export default PetCard = ({
             //{onSend}
             actualizar(a);
             async function actualizar(a) {
-                const uniqueId = "7UVpezxDSSISWRebNrCr";
+                const uniqueId = a.uid;
                 const usuariosRef = doc(collection(database, "products"), uniqueId)
                 await updateDoc(usuariosRef, { requests: a.requests });
                 //console.log(a.id)
@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 10,
+    //backgroundColor: black,
   },
   icons2: {
     flexDirection: "row",

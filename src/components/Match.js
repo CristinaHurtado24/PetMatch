@@ -2,7 +2,8 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ButtonGradient from "./ButtonGradient";
-import PetCardMatch from "./PetCardMatch";
+import PetCard from "./PetCardMatch";
+
 import {
   StyleSheet,
   Text,

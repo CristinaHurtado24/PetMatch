@@ -58,7 +58,7 @@ function Home() {
           title: "Match",
           headerBackVisible: false,
           tabBarIcon: (tabInfo) => (
-            <AntDesign name="hearto" size={35} color="#1C1A19" />
+            <AntDesign name="hearto" size={35} color="#941DE8" />
           ),
         }}
         initialParams={{ userEmail: route.params.userEmail }}
@@ -71,7 +71,7 @@ function Home() {
           title: "Profile",
           headerBackVisible: false,
           tabBarIcon: (tabInfo) => (
-            <AntDesign name="user" size={35} color="#1C1A19" />
+            <AntDesign name="user" size={35} color="#941DE8" />
           ),
         }}
         initialParams={{ userEmail: route.params.userEmail }}
