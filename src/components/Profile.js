@@ -11,14 +11,11 @@ import {
   StatusBar,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { Routes } from "react-router-native";
-const { width, height } = Dimensions.get("window");
 
-export default Profile = ({ navigation }) => {
+export default Profile = () => {
   const route = useRoute();
   const [products, setProducts] = React.useState([]);
   var userprof = "";
-  const [productsA, setProductsA] = React.useState([]);
 
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
@@ -48,15 +45,9 @@ export default Profile = ({ navigation }) => {
 
   for (let index = 0; index < products.length; index++) {
     const element = products[index];
-    console.log("entra");
-    console.log(element);
+
     if (element.email === route.params.userEmail) {
-      console.log("**************");
-      console.log(route.params.userEmail);
-      console.log("**************");
       var userprof = element;
-      console.log(userprof);
-      //setProductsA(element);
     }
   }
 

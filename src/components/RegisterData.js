@@ -1,8 +1,7 @@
 import * as React from "react";
-import * as RN from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { database, auth } from "../config/fb";
-import { collection, addDoc, doc, setDoc} from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import DogDataButton from "./DogDataButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -18,7 +17,6 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
-import { Button } from "react-native-paper";
 import { async } from "@firebase/util";
 
 const { width, height } = Dimensions.get("window");
@@ -42,7 +40,11 @@ export default RegisterData = () => {
 
   const register = async () => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, newItem.email, newItem.password);
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        newItem.email,
+        newItem.password
+      );
       const user = res.user;
       //campos que tendrá la cuenta en sí
       await setDoc(doc(database, "products", user.uid), {
@@ -57,7 +59,7 @@ export default RegisterData = () => {
         raza: newItem.raza,
         dogAge: newItem.dogAge,
         dogSex: newItem.dogSex,
-          //match: doc.data().match,
+        //match: doc.data().match,
         requests: [],
         match: [],
         image: newItem.image,
@@ -86,8 +88,6 @@ export default RegisterData = () => {
   });
 
   const onSend = async () => {
-    //await addDoc(collection(database, "users"), newItem);
-    //navigation.goBack();
     register(newItem);
   };
 
@@ -181,33 +181,8 @@ export default RegisterData = () => {
             onChangeText={(text) => setNewItem({ ...newItem, url: text })}
           />
 
-          {/* <View>
-            {checkImage(newItem)}
-            <TouchableOpacity
-                onPress={() => getPermissionAsync()}
-            style={styles.container4}
-
-            >
-            <LinearGradient
-                // Button Linear Gradient
-                colors={["#941DE8", "#941DE8"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.button}
-              >
-                <Text style={styles.text}>Selecciona una imagen de tu mascota</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-
-
-          </View> */}
-
           <View>
-            <TouchableOpacity
-              style={styles.container3}
-              //onPress={() => navigation.navigate("Onboarding")}
-              onPress={onSend}
-            >
+            <TouchableOpacity style={styles.container3} onPress={onSend}>
               <LinearGradient
                 // Button Linear Gradient
                 colors={["#941DE8", "#C691EB"]}

@@ -1,36 +1,17 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ButtonGradient from "./ButtonGradient";
 import PetCard from "./PetCardMatch";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  Dimensions,
-  Button,
-  Alert,
-  BackHandler,
-  ScrollView,
-} from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
 import { database } from "../config/fb";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useRoute } from "@react-navigation/native";
-import { Routes } from "react-router-native";
 
 const { width, height } = Dimensions.get("window");
 
-export default Match = ({ navigation }) => {
+export default Match = () => {
   const route = useRoute();
   const [products, setProducts] = React.useState([]);
-  var userprof = "";
   var helper = [];
-  const [productsA, setProductsA] = React.useState([]);
 
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
@@ -57,7 +38,6 @@ export default Match = ({ navigation }) => {
     return unsuscribe;
   }, []);
 
-  //console.log(products);
   console.log(route.params.userEmail);
 
   for (let index = 0; index < products.length; index++) {
@@ -65,11 +45,7 @@ export default Match = ({ navigation }) => {
     if (element.email === route.params.userEmail) {
       for (let index = 0; index < element.requests.length; index++) {
         const element2 = element.requests[index];
-        console.log("+++++++++++");
-        //console.log(element2);
-        //helper.push(element2);
 
-        console.log("+++++++++++");
         for (let index = 0; index < products.length; index++) {
           const element3 = products[index];
           if (element3.email === element2) {
@@ -77,32 +53,8 @@ export default Match = ({ navigation }) => {
           }
         }
       }
-      console.log("&&&&&&&&&&&&&&");
-      console.log("&&&&&&&&&&&&&&");
-      console.log("&&&&&&&&&&&&&&");
-      console.log("&&&&&&&&&&&&&&");
-      console.log(helper);
-      console.log("&&&&&&&&&&&&&&");
-      console.log("&&&&&&&&&&&&&&");
-      console.log("&&&&&&&&&&&&&&");
-      console.log("&&&&&&&&&&&&&&");
     }
-
-    // for (let index = 0; index < element.requests.length; index++) {
-    //   const element2 = element.requests[index];
-    //   if (element2 === route.params.userEmail) {
-    //     console.log("se encontro perra");
-    //     console.log("*******");
-    //     console.log("*******");
-    //     console.log(element);
-    //     helper.push(element);
-
-    //     console.log("*******");
-    //     console.log("*******");
-    //   }
-    // }
   }
-  //setProductsA(helper);
 
   return (
     <ScrollView>

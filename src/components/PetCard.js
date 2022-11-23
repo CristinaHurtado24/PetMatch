@@ -1,16 +1,14 @@
 import * as React from "react";
 import * as RN from "react-native";
 import { database } from "../config/fb";
-
 import { AntDesign } from "@expo/vector-icons";
-
 import {
+  collection,
   onSnapshot,
   orderBy,
   query,
   updateDoc,
   doc,
-  collection,
 } from "firebase/firestore";
 import {
   View,
@@ -52,7 +50,7 @@ export default PetCard = ({
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       setProducts(
         querySnapshot.docs.map((doc) => ({
-          uid: doc.data().uid,
+          id: doc.id,
           email: doc.data().email,
           password: doc.data().password,
           name: doc.data().name,
@@ -109,20 +107,10 @@ export default PetCard = ({
   }
 
   const navigation = useNavigation();
-  const collectionRef = collection(database, "products");
-  const onSend = async () => {
-    console.log("pasaaaaaaa");
-    await updateDoc(collection(database, "products", "7UVpezxDSSISWRebNrCr"), {
-      phone: "123",
-    });
-    //navigation.goBack();
-  };
-
   return (
     <View style={styles.all}>
       <View style={styles.cardContainer}>
         <Image style={styles.imageStyle} source={{ uri: url }}></Image>
-<<<<<<< HEAD
         <Text style={styles.name}>{dogName}</Text>
         <Text style={styles.raza}>{raza}</Text>
         <View style={styles.icons}>
@@ -131,7 +119,7 @@ export default PetCard = ({
             size={50}
             color="#941DE8"
             onPress={() => {
-              Alert.alert("Hacer match");
+              Alert.alert("Has enviado tu solicitud");
               console.log(email);
               const a = buscar(email);
               //match.push(userprof);
@@ -139,31 +127,13 @@ export default PetCard = ({
               //{onSend}
               actualizar(a);
               async function actualizar(a) {
-                const uniqueId = "Ogh4iGMdyF3904ZhA04O";
+                const uniqueId = doc.uid;
+                console.log("kkkkkkkkkkk");
+                console.log(doc.uid);
                 const usuariosRef = doc(
                   collection(database, "products"),
                   uniqueId
                 );
-=======
-      <Text style={styles.name}>{dogName}</Text>
-      <Text style={styles.raza}>{raza}</Text>
-      <View style={styles.icons}>
-        <AntDesign
-          name="heart"
-          size={50}
-          color="#941DE8"
-          onPress={() => {
-            Alert.alert("Enviada la solicitud");
-            console.log(email);
-            const a = buscar(email);
-            //match.push(userprof);
-            //console.log(match)
-            //{onSend}
-            actualizar(a);
-            async function actualizar(a) {
-                const uniqueId = a.uid;
-                const usuariosRef = doc(collection(database, "products"), uniqueId)
->>>>>>> 867099cdda1d9249bcecbd38242e0cd63296c6ee
                 await updateDoc(usuariosRef, { requests: a.requests });
                 //console.log(a.id)
                 //DocumentReference docRef = db.collection("cities").document("DC");
@@ -268,7 +238,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 10,
-    //backgroundColor: black,
   },
   icons2: {
     flexDirection: "row",

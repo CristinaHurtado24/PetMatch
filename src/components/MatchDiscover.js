@@ -6,13 +6,8 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Searchbar } from "react-native-paper";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { useRoute } from "@react-navigation/native";
-<<<<<<< HEAD
-=======
-
->>>>>>> 867099cdda1d9249bcecbd38242e0cd63296c6ee
 import PetCard from "./PetCard";
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
-//import { black, white } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 const { width, height } = Dimensions.get("window");
 
@@ -20,15 +15,11 @@ const { width, height } = Dimensions.get("window");
 const items = [
   //name key is must.It is to show the text in front
   { id: 1, name: "Raza" },
-  { id: 2, name: "Ciudad" },
+  //{ id: 2, name: "Ciudad" },
 ];
 export default Match = () => {
   const navigation = useNavigation();
   const route = useRoute();
-<<<<<<< HEAD
-
-=======
->>>>>>> 867099cdda1d9249bcecbd38242e0cd63296c6ee
   const [products, setProducts] = React.useState([]);
   const [productsA, setProductsA] = React.useState([]);
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -100,10 +91,10 @@ export default Match = () => {
           //On text change listner on the searchable input
           onItemSelect={onChangeFilter}
           //onItemSelect called after the selection from the dropdown
-          containerStyle={{ 
+          containerStyle={{
             padding: 5,
             borderRadius: 30,
-            }}
+          }}
           //suggestion container style
           textInputStyle={{
             //inserted text style

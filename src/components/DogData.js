@@ -1,9 +1,5 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ButtonGradient from "./ButtonGradient";
 import SingUpButton from "./SingUpButton";
-import DogDataButton from "./DogDataButton";
 import {
   StyleSheet,
   Text,
@@ -11,16 +7,11 @@ import {
   TextInput,
   Image,
   Dimensions,
-  Button,
-  Alert,
-  BackHandler,
 } from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
-import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
-export default DogData = ({ navigation }) => {
+export default DogData = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
@@ -64,8 +55,6 @@ const styles = StyleSheet.create({
     alignItems: "left",
     justifyContent: "left",
     marginTop: 5,
-    //alignItems: "center",
-    //justifyContent: "center",
     color: "grey",
   },
   margen: {
@@ -118,7 +107,6 @@ const styles = StyleSheet.create({
   },
   imgpic: {
     marginTop: 10,
-
     width: 300,
     height: 300,
   },

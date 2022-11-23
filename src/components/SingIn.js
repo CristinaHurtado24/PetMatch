@@ -1,7 +1,4 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ButtonGradient from "./ButtonGradient";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -18,15 +15,12 @@ import {
   Dimensions,
   Button,
   Alert,
-  BackHandler,
   TouchableOpacity,
 } from "react-native";
-import { NativeScreenNavigationContainer } from "react-native-screens";
 
 const { width, height } = Dimensions.get("window");
 
 export default SingIn = () => {
-  //const navigation = useNavigation();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -115,11 +109,7 @@ export default SingIn = () => {
             <Button title="Sign In" onPress={handleSignIn} />
           </View> */}
         <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.container3}
-            //onPress={() => navigation.navigate("Onboarding")}
-            onPress={handleSignIn}
-          >
+          <TouchableOpacity style={styles.container3} onPress={handleSignIn}>
             <LinearGradient
               // Button Linear Gradient
               colors={["#941DE8", "#C691EB"]}
@@ -135,7 +125,6 @@ export default SingIn = () => {
           <Button
             title="No tengo cuenta"
             color={"grey"}
-            //onPress={() => Alert.alert("Poner ruta crear cuenta")}
             onPress={() => navigation.navigate("LandingRegister")}
           ></Button>
         </View>
