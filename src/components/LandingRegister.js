@@ -33,7 +33,7 @@ export default function RegisterOwner({ navigation }) {
           color="#ffff"
         />
       </View>
-      <Text style={styles.text}>O registrate con</Text>
+      {/* <Text style={styles.text}>O registrate con</Text>
       <View style={styles.options}>
         <AntDesign
           name="twitter"
@@ -59,7 +59,7 @@ export default function RegisterOwner({ navigation }) {
             Alert.alert("Inicio con Facebook");
           }}
         />
-      </View>
+      </View> */}
     </View>
   );
 }

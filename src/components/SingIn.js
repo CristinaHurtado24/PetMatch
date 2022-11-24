@@ -38,10 +38,11 @@ export default SingIn = () => {
         console.log("Signed in!");
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate("Home");
+        navigation.navigate("Home", { userEmail: email });
       })
       .catch((error) => {
         console.log(error);
+        Alert.alert("El correo y/o la contraseña son inválidas");
       });
   };
   return (
@@ -69,11 +70,12 @@ export default SingIn = () => {
           <TextInput
             placeholder="Contraseña"
             style={styles.textInput}
+            secureTextEntry={true}
             onChangeText={(text) => setPassword(text)}
           />
         </View>
 
-        <View style={styles.options}>
+        {/* <View style={styles.options}>
           <AntDesign
             name="twitter"
             size={40}
@@ -98,16 +100,16 @@ export default SingIn = () => {
               Alert.alert("Inicio con Facebook (Proximamente)");
             }}
           />
-        </View>
+        </View> */}
 
-        <View style={styles.buttontext}>
+        {/* <View style={styles.buttontext}>
           <Button
             color={"grey"}
             title="¿Olvidaste tu contraseña?"
             //onPress={() => navigation.navigate(Home)}
             onPress={() => Alert.alert("Poner ruta olvide contraseña")}
           />
-        </View>
+        </View> */}
 
         {/* <View>
             <Button title="Sign In" onPress={handleSignIn} />

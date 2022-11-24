@@ -1,5 +1,6 @@
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { database } from "../config/fb";
 import {
   View,
   Image,
@@ -11,83 +12,143 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-const users = [
-  {
-    name: "Tobby",
-    avatar:
-      "https://www.purina-latam.com/sites/g/files/auxxlc391/files/styles/social_share_large/public/purina-que-sabes-de-los-perros-poodle_0.jpg?itok=BA9kq-Fz",
-  },
-  {
-    name: "Jagger",
-    avatar:
-      "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal_recorte1.jpg",
-  },
-  {
-    name: "Sasha",
-    avatar:
-      "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros.jpg",
-  },
-  {
-    name: "Roca",
-    avatar:
-      "https://estaticos.muyinteresante.es/uploads/images/article/62cfb46c5cafe8b3a50cffb6/perros.populares.jpg",
-  },
-  {
-    name: "Manchas",
-    avatar:
-      "https://media.traveler.es/photos/613760adcb06ad0f20e11980/master/w_1600%2Cc_limit/202931.jpg",
-  },
-  {
-    name: "Honney",
-    avatar:
-      "https://s1.eestatic.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg",
-  },
-];
+import { useRoute } from "@react-navigation/native";
+import {
+  onSnapshot,
+  orderBy,
+  query,
+  updateDoc,
+  doc,
+  collection,
+} from "firebase/firestore";
 
-export default PetCard = () => {
+export default PetCard = ({
+  id,
+  name,
+  lastName,
+  email,
+  password,
+  phone,
+  dogName,
+  raza,
+  dogAge,
+  dogSex,
+  url,
+  requests,
+}) => {
+  const route = useRoute();
   const navigation = useNavigation();
-  return (
-    <ScrollView>
-      {users.map((u, i) => {
-        return (
-          <View key={i} style={styles.cardContainer}>
-            <TouchableHighlight
-              onPress={() =>
-                navigation.navigate("ProfileMatch", {
-                  name: u.name,
-                  url: u.avatar,
-                })
-              }
-            >
-              <Image
-                style={styles.imageStyle}
-                source={{ uri: u.avatar }}
-              ></Image>
-            </TouchableHighlight>
-            <Text style={styles.name}>{u.name}</Text>
-            <View style={styles.icons}>
-              <AntDesign
-                name="message1"
-                size={50}
-                color="#1C1A19"
-                onPress={() => {
-                  Alert.alert("mensaje a usuario");
-                }}
-              />
+  const [products, setProducts] = React.useState([]);
+  var userprof = "";
+  const [productsA, setProductsA] = React.useState([]);
 
-              <AntDesign
-                name="close"
-                size={50}
-                color="#1C1A19"
-                onPress={() => {
-                  Alert.alert("quitar de match");
-                }}
-              />
-            </View>
-          </View>
-        );
-      })}
-    </ScrollView>
+  React.useEffect(() => {
+    const collectionRef = collection(database, "products");
+    const q = query(collectionRef, orderBy("name", "desc"));
+
+    const unsuscribe = onSnapshot(q, (querySnapshot) => {
+      setProducts(
+        querySnapshot.docs.map((doc) => ({
+          uid: doc.data().uid,
+          email: doc.data().email,
+          password: doc.data().password,
+          name: doc.data().name,
+          lastName: doc.data().lastName,
+          dogName: doc.data().dogName,
+          url: doc.data().url,
+          phone: doc.data().phone,
+          raza: doc.data().raza,
+          dogAge: doc.data().dogAge,
+          dogSex: doc.data().dogSex,
+          //match: doc.data().match,
+          requests: doc.data().requests,
+        }))
+      );
+    });
+    return unsuscribe;
+  }, []);
+
+  console.log(products);
+
+  for (let index = 0; index < products.length; index++) {
+    const element = products[index];
+    console.log("entra");
+    console.log(element);
+    if (element.email === route.params.userEmail) {
+      console.log("**************");
+      console.log(route.params.userEmail);
+      console.log("**************");
+      var userprof = element;
+      console.log(userprof);
+      //setProductsA(element);
+    }
+  }
+
+  function buscar(email) {
+    for (let index = 0; index < products.length; index++) {
+      const elements = products[index];
+      //console.log("entra");
+      //console.log(elements);
+      if (email === elements.email) {
+        var userprofmatch = elements;
+        console.log(userprofmatch);
+        //setProductsA(element);
+        userprofmatch.requests.push(userprof.email);
+        console.log(userprofmatch);
+        //ref.set(userprofmatch)
+        console.log("jjjjjjjjjjj");
+        //console.log(database)
+        //const uniqueId = userprofmatch.id;
+        //await database.collection("products").doc(uniqueId).update()
+      }
+    }
+    return userprofmatch;
+  }
+
+  return (
+    <View style={styles.all}>
+      <View style={styles.cardContainer}>
+        <Image style={styles.imageStyle} source={{ uri: url }}></Image>
+      <Text style={styles.name}>{dogName}</Text>
+      <Text style={styles.raza}>{raza}</Text>
+      <View style={styles.icons}>
+        <AntDesign
+          name="phone"
+          size={40}
+          color="#941DE8"
+          style={styles.icon1}
+          onPress={() => {
+            console.log(email);
+            const a = buscar(email);
+            const t = a.phone;
+            Alert.alert(t);
+              }
+            }
+          />
+          <AntDesign
+            name="infocirlceo"
+            size={40}
+            color="#941DE8"
+            onPress={() =>
+              navigation.navigate("ProfileMatch", {
+                dogName: dogName,
+                url: url,
+                email: email,
+                password: password,
+                name: name,
+                lastName: lastName,
+                dogName: dogName,
+                url: url,
+                phone: phone,
+                raza: raza,
+                dogAge: dogAge,
+                dogSex: dogSex,
+              })
+            }
+          />
+        </View>
+      </View>
+    </View>
   );
 };
 
@@ -95,9 +156,13 @@ const deviceWidth = Math.round(Dimensions.get("window").width);
 const radius = 20;
 
 const styles = StyleSheet.create({
+  all: {
+    alignSelf: "center",
+  },
+
   cardContainer: {
-    width: deviceWidth - 20,
-    height: 500,
+    width: deviceWidth - 70,
+    height: 200,
     backgroundColor: "#fff",
     borderRadius: 20,
     shadowColor: "#Grey",
@@ -105,18 +170,22 @@ const styles = StyleSheet.create({
       width: 5,
       height: 5,
     },
-    shadowOpacity: 0.7,
+    shadowOpacity: 0.3,
     elevation: 2,
     shadowRadius: 5,
-    marginBottom: 15,
-    marginTop: 15,
+    marginBottom: 5,
+    marginTop: 30,
     marginHorizontal: 10,
+    alignself: "center",
   },
   imageStyle: {
-    height: 370,
-    width: deviceWidth - 20,
-    borderTopRightRadius: radius,
+    height: 200,
+    width: deviceWidth-230,
+    //borderTopRightRadius: radius,
     borderTopLeftRadius: radius,
+    //borderBottomEndRadius: radius,
+    borderBottomStartRadius: radius,
+    resizeMode: "cover",
   },
   title: {
     fontSize: 40,
@@ -125,20 +194,41 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "600",
     alignSelf: "center",
+    top: -160,
+    right: -90,
+  },
+
+  raza: {
+    fontSize: 20,
+    fontWeight: "400",
+    alignSelf: "center",
+    top: -160,
+    right: -90,
   },
 
   icons: {
     flexDirection: "row",
     justifyContent: "space-around",
+    marginLeft: 120,
     marginTop: 10,
+    top: -140,
+    right: -140,
+    width: 40,
   },
+
+  icon1 : {
+    right: 40,
+  },
+
   icons2: {
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 55,
+    top: -160,
+    right: -70,
   },
   filter: {
     backgroundColor: "#941DE8",
@@ -157,4 +247,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-});
+})
