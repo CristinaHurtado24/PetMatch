@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, StatusBar, BackHandler } from "react-native";
 import Onboarding from "./src/components/Onboarding.js";
 import LandingRegister from "./src/components/LandingRegister.js";
-
-import ButtonGradient from "./src/components/ButtonGradient.js";
 import SingIn from "./src/components/SingIn";
 import RegisterData from "./src/components/RegisterData.js";
 import Match from "./src/components/Match.js";
@@ -11,14 +9,10 @@ import Profile from "./src/components/Profile.js";
 import DogData from "./src/components/DogData.js";
 import ProfileMatch from "./src/components/ProfileMatch.js";
 import { NavigationContainer } from "@react-navigation/native";
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MatchDiscover from "./src/components/MatchDiscover.js";
-
 import { AntDesign } from "@expo/vector-icons";
-
 import { useRoute } from "@react-navigation/native";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

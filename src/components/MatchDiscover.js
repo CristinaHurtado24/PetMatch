@@ -8,7 +8,8 @@ import SearchableDropdown from "react-native-searchable-dropdown";
 import { useRoute } from "@react-navigation/native";
 import PetCard from "./PetCard";
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
-
+import console from "eslint-plugin-node/lib/rules/prefer-global/console";
+import { Date } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 //Item array for the dropdown
@@ -55,7 +56,7 @@ export default Match = () => {
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
     const q = query(collectionRef, orderBy("name", "desc"));
-
+    /*AQUIIIIIII*/
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       setProducts(
         querySnapshot.docs.map((doc) => ({
@@ -73,6 +74,7 @@ export default Match = () => {
         }))
       );
     });
+
     return unsuscribe;
   }, []);
 

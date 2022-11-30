@@ -41,7 +41,14 @@ export default Profile = () => {
     return unsuscribe;
   }, []);
 
-  console.log(products);
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  let start = new Date().getMilliseconds();
+  console.log(start);
 
   for (let index = 0; index < products.length; index++) {
     const element = products[index];
@@ -50,6 +57,15 @@ export default Profile = () => {
       var userprof = element;
     }
   }
+  let end = new Date().getMilliseconds();
+  console.log(end);
+  console.log(end - start);
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
 
   return (
     <ScrollView style={styles.containerScroll}>

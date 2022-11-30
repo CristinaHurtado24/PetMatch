@@ -77,6 +77,7 @@ export default PetCard = ({
     console.log(element);
     if (element.email === route.params.userEmail) {
       console.log("**************");
+
       console.log(route.params.userEmail);
       console.log("**************");
       var userprof = element;
@@ -119,8 +120,9 @@ export default PetCard = ({
             size={50}
             color="#941DE8"
             onPress={() => {
-              Alert.alert("Has enviado tu solicitud");
+              Alert.alert("Mandaste la solicitud");
               console.log(email);
+
               const a = buscar(email);
               //match.push(userprof);
               //console.log(match)
