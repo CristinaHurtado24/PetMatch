@@ -11,7 +11,7 @@ export default [
     title: "Matches",
     description: "Podrás ver los matches que hagas con otras mascotas.",
     image:
-      "https://st.depositphotos.com/1007630/2727/i/450/depositphotos_27276047-stock-photo-portrait-of-two-young-beauty.jpg",
+      "https://images.pexels.com/photos/33287/dog-viszla-close.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
     id: "3",
