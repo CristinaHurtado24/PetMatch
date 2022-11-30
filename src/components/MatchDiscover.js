@@ -8,48 +8,28 @@ import SearchableDropdown from "react-native-searchable-dropdown";
 import { useRoute } from "@react-navigation/native";
 import PetCard from "./PetCard";
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
-import console from "eslint-plugin-node/lib/rules/prefer-global/console";
-import { Date } from "react-native";
-const { width, height } = Dimensions.get("window");
+//import { black, white } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
-//Item array for the dropdown
-const items = [
-  //name key is must.It is to show the text in front
-  { id: 1, name: "Raza" },
-  //{ id: 2, name: "Ciudad" },
-];
 export default Match = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const [products, setProducts] = React.useState([]);
   const [productsA, setProductsA] = React.useState([]);
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [searchFilter, setSearchFilter] = React.useState("");
 
-  const onChangeFilter = (selected) => {
-    setSearchFilter(selected.id);
-    console.log("Filter id");
-    console.log(searchFilter);
-  };
   const onChangeSearch = (query) => {
     setSearchQuery(query);
     console.log(searchQuery);
     const helper = [];
-    if (searchQuery != "" && searchFilter != "") {
-      if (searchFilter == 1) {
-        //Busca por raza
-        for (let index = 0; index < products.length; index++) {
-          const element = products[index];
-          if (element.raza === searchQuery) {
-            helper.push(element);
-          }
+    if (searchQuery != "") {
+      //Busca por raza
+      for (let index = 0; index < products.length; index++) {
+        const element = products[index];
+        if (element.raza === searchQuery) {
+          helper.push(element);
         }
-      } else {
-        //Busca por ciudad
+        setProductsA(helper);
       }
-      setProductsA(helper);
-    } else if (searchFilter == "") {
-      Alert.alert("Seleccione un filtro");
     }
   };
 
@@ -87,51 +67,6 @@ export default Match = () => {
           value={searchQuery}
           icon="magnify"
           style={styles.searchbar}
-        />
-        <SearchableDropdown
-          onTextChange={(text) => console.log(text)}
-          //On text change listner on the searchable input
-          onItemSelect={onChangeFilter}
-          //onItemSelect called after the selection from the dropdown
-          containerStyle={{
-            padding: 5,
-            borderRadius: 30,
-          }}
-          //suggestion container style
-          textInputStyle={{
-            //inserted text style
-            padding: 12,
-            borderWidth: 1,
-            borderColor: "#941DE8",
-            backgroundColor: "#FAF7F6",
-            borderRadius: 60,
-            marginTop: 15,
-          }}
-          itemStyle={{
-            //single dropdown item style
-            padding: 10,
-            marginTop: 5,
-            backgroundColor: "#FAF9F8",
-            borderColor: "#941DE8",
-            borderWidth: 1,
-            borderRadius: 30,
-            textAlign: "center",
-            justifyContent: "center",
-          }}
-          itemTextStyle={{
-            //text style of a single dropdown item
-            color: "#222",
-          }}
-          itemsContainerStyle={{
-            //items container style you can pass maxHeight
-            //to restrict the items dropdown hieght
-            maxHeight: "60%",
-          }}
-          items={items}
-          placeholder="Filtro"
-          //place holder for the search input
-          resetValue={false}
-          //reset textInput Value with true and false state
         />
       </View>
       {productsA.length != 0 ? (
@@ -195,9 +130,10 @@ const styles = StyleSheet.create({
   },
   search: {
     flexDirection: "row",
+    justifyContent: "center",
   },
   searchbar: {
-    width: 350,
+    width: 400,
     marginTop: 15,
     borderRadius: 30,
   },
