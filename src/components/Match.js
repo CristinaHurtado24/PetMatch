@@ -30,6 +30,7 @@ export default Match = ({ navigation }) => {
   const [products, setProducts] = React.useState([]);
   var userprof = "";
   var helper = [];
+  let result = [];
   const [productsA, setProductsA] = React.useState([]);
 
   React.useEffect(() => {
@@ -86,6 +87,10 @@ export default Match = ({ navigation }) => {
       console.log("&&&&&&&&&&&&&&");
       console.log("&&&&&&&&&&&&&&");
       console.log("&&&&&&&&&&&&&&");
+
+      result = helper.filter((item,index)=>{
+        return helper.indexOf(item) === index;
+      })
     }
 
     // for (let index = 0; index < element.requests.length; index++) {
@@ -107,7 +112,7 @@ export default Match = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {helper.map((product) => (
+        {result.map((product) => (
           <PetCard key={product.id} {...product} />
         ))}
       </View>

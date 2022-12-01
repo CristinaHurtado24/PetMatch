@@ -1,6 +1,8 @@
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { database } from "../config/fb";
+import * as Linking from 'expo-linking';
+
 import {
   View,
   Image,
@@ -112,8 +114,7 @@ export default PetCard = ({
       <Text style={styles.name}>{dogName}</Text>
       <Text style={styles.raza}>{raza}</Text>
       <View style={styles.icons}>
-        <AntDesign
-          name="phone"
+         <WhatsAppOutlined
           size={40}
           color="#941DE8"
           style={styles.icon1}
@@ -121,7 +122,7 @@ export default PetCard = ({
             console.log(email);
             const a = buscar(email);
             const t = a.phone;
-            Alert.alert(t);
+            Linking.openURL('https://wa.me/'+t)
               }
             }
           />

@@ -24,6 +24,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
+import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
 //import database from "../config/fb"
 
 export default PetCard = ({
@@ -45,6 +46,7 @@ export default PetCard = ({
   var userprof = "";
   const [productsA, setProductsA] = React.useState([]);
 
+
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
     const q = query(collectionRef, orderBy("name", "desc"));
@@ -65,6 +67,7 @@ export default PetCard = ({
           dogSex: doc.data().dogSex,
           //match: doc.data().match,
           requests: doc.data().requests,
+          sent: doc.data().sent,
         }))
       );
     });
@@ -108,6 +111,27 @@ export default PetCard = ({
     return userprofmatch;
   }
 
+  function buscar2(email) {
+    for (let index = 0; index < products.length; index++) {
+      const elements = products[index];
+      //console.log("entra");
+      //console.log(elements);
+      if ( route.params.userEmail === elements.email) {
+        var userprofmatch = elements;
+        console.log(userprofmatch);
+        //setProductsA(element);
+        userprofmatch.sent.push(email);
+        console.log(userprofmatch);
+        //ref.set(userprofmatch)
+        console.log("jjjjjjjjjjj");
+        //console.log(database)
+        //const uniqueId = userprofmatch.id;
+        //await database.collection("products").doc(uniqueId).update()
+      }
+      } return userprofmatch;
+    }
+
+    
   const navigation = useNavigation();
   const collectionRef = collection(database, "products");
   const onSend = async () => {
@@ -117,6 +141,12 @@ export default PetCard = ({
     });
     //navigation.goBack();
   };
+
+  async function actualizar2(b) {
+    //const f = "Andrea@gmail.com"
+    const uniqueId = b.uid;
+    const usuariosRef = doc(collection(database, "products"), uniqueId)
+    await updateDoc(usuariosRef, { sent: b.sent  });}
 
   return (
     <View style={styles.all}>
@@ -132,15 +162,23 @@ export default PetCard = ({
           onPress={() => {
             Alert.alert("Enviada la solicitud");
             console.log(email);
+            //console.log(b);
             const a = buscar(email);
+            //const b = buscar2(email)
+            //actualizar2(b);
             //match.push(userprof);
             //console.log(match)
             //{onSend}
             actualizar(a);
+            //actualizar_2(b);
             async function actualizar(a) {
                 const uniqueId = a.uid;
                 const usuariosRef = doc(collection(database, "products"), uniqueId)
-                await updateDoc(usuariosRef, { requests: a.requests });
+                await updateDoc(usuariosRef, { requests: a.requests });}
+            //async function actualizar_2(b) {
+                //const uniqueId = b.uid;
+                //const usuariosRef = doc(collection(database, "products"), uniqueId)
+                //await updateDoc(usuariosRef, { sent: b.sent });}
                 //console.log(a.id)
                 //DocumentReference docRef = db.collection("cities").document("DC");
                 // await database.collection("products").doc(uniqueId).update(
@@ -159,7 +197,6 @@ export default PetCard = ({
                 //     requests: a.requests,
                 //   }
                 //)
-              }
             }}
           />
           <AntDesign

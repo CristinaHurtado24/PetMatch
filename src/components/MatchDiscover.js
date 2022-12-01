@@ -26,7 +26,7 @@ export default Match = () => {
       //Busca por raza
       for (let index = 0; index < products.length; index++) {
         const element = products[index];
-        if (element.raza === searchQuery) {
+        if (element.raza === searchQuery && element.email != route.params.userEmail) {
           helper.push(element);
         }
       setProductsA(helper);
@@ -51,11 +51,44 @@ export default Match = () => {
           raza: doc.data().raza,
           dogAge: doc.data().dogAge,
           dogSex: doc.data().dogSex,
+          sent: doc.data().sent, 
         }))
       );
     });
     return unsuscribe;
   }, []);
+  
+
+  function listanueva(products) {
+    var elements = [];
+
+    for (let index = 0; index < products.length; index++) {
+      const element = products[index];
+      if (element.email != route.params.userEmail){
+      elements.push(products[index])}
+    }
+
+
+      for (let index = 0; index < products.length; index++) {
+        const element = products[index];
+        if (element.email === route.params.userEmail) {
+          for (let index = 0; index < element.sent.length; index++) {
+            const elements2 = element.sent[index];
+              if (element.email != elements2 && element.email != route.params.userEmail) {
+                userprofmatch.push(element);
+            }
+          }
+        }
+        break;
+      }
+      //console.log("entra");
+      //console.log(elements);
+      //for (let j = 0; j < x.length; j++) {}
+      //for (let i = 0; i < elements.length; i++) {
+        // if (elements.email != route.params.userEmail) {
+        //   userprofmatch.push(elements)
+        //   console.log("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd")
+        return elements;}  
 
   return (
     <>
@@ -80,7 +113,7 @@ export default Match = () => {
         </ScrollView>
       ) : (
         <ScrollView>
-          {products.map((product) => (
+          {listanueva(products).map((product) => (
             <PetCard key={product.id} {...product} />
           ))}
         </ScrollView>
@@ -134,6 +167,7 @@ const styles = StyleSheet.create({
   searchbar: {
     width: 400,
     marginTop: 15,
+    marginBottom: 15,
     borderRadius: 30,
   },
 });
