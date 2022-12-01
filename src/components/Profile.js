@@ -9,16 +9,15 @@ import {
   Dimensions,
   ScrollView,
   StatusBar,
+  Button,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { Routes } from "react-router-native";
-const { width, height } = Dimensions.get("window");
+import * as Linking from "expo-linking";
 
-export default Profile = ({ navigation }) => {
+export default Profile = () => {
   const route = useRoute();
   const [products, setProducts] = React.useState([]);
   var userprof = "";
-  const [productsA, setProductsA] = React.useState([]);
 
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
@@ -44,21 +43,31 @@ export default Profile = ({ navigation }) => {
     return unsuscribe;
   }, []);
 
-  console.log(products);
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  let start = new Date().getMilliseconds();
+  console.log(start);
 
   for (let index = 0; index < products.length; index++) {
     const element = products[index];
-    console.log("entra");
-    console.log(element);
+
     if (element.email === route.params.userEmail) {
-      console.log("**************");
-      console.log(route.params.userEmail);
-      console.log("**************");
       var userprof = element;
-      console.log(userprof);
-      //setProductsA(element);
     }
   }
+  let end = new Date().getMilliseconds();
+  console.log(end);
+  console.log(end - start);
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
+  console.log("*********");
 
   return (
     <ScrollView style={styles.containerScroll}>

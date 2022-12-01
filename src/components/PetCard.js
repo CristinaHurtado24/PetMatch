@@ -1,16 +1,14 @@
 import * as React from "react";
 import * as RN from "react-native";
 import { database } from "../config/fb";
-
 import { AntDesign } from "@expo/vector-icons";
-
 import {
+  collection,
   onSnapshot,
   orderBy,
   query,
   updateDoc,
   doc,
-  collection,
 } from "firebase/firestore";
 import {
   View,
@@ -54,7 +52,7 @@ export default PetCard = ({
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       setProducts(
         querySnapshot.docs.map((doc) => ({
-          uid: doc.data().uid,
+          id: doc.id,
           email: doc.data().email,
           password: doc.data().password,
           name: doc.data().name,
@@ -82,6 +80,7 @@ export default PetCard = ({
     console.log(element);
     if (element.email === route.params.userEmail) {
       console.log("**************");
+
       console.log(route.params.userEmail);
       console.log("**************");
       var userprof = element;
@@ -281,7 +280,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 10,
-    //backgroundColor: black,
   },
   icons2: {
     flexDirection: "row",

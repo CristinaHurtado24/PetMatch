@@ -1,5 +1,6 @@
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { database } from "../config/fb";
 import * as Linking from 'expo-linking';
 
@@ -10,19 +11,11 @@ import {
   StyleSheet,
   Dimensions,
   Alert,
-  ScrollView,
-  TouchableHighlight,
+  Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import {
-  onSnapshot,
-  orderBy,
-  query,
-  updateDoc,
-  doc,
-  collection,
-} from "firebase/firestore";
+import { onSnapshot, orderBy, query, collection } from "firebase/firestore";
 
 export default PetCard = ({
   id,
@@ -36,13 +29,11 @@ export default PetCard = ({
   dogAge,
   dogSex,
   url,
-  requests,
 }) => {
   const route = useRoute();
   const navigation = useNavigation();
   const [products, setProducts] = React.useState([]);
   var userprof = "";
-  const [productsA, setProductsA] = React.useState([]);
 
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
@@ -74,34 +65,20 @@ export default PetCard = ({
 
   for (let index = 0; index < products.length; index++) {
     const element = products[index];
-    console.log("entra");
-    console.log(element);
+
     if (element.email === route.params.userEmail) {
-      console.log("**************");
-      console.log(route.params.userEmail);
-      console.log("**************");
       var userprof = element;
-      console.log(userprof);
-      //setProductsA(element);
     }
   }
 
   function buscar(email) {
     for (let index = 0; index < products.length; index++) {
       const elements = products[index];
-      //console.log("entra");
-      //console.log(elements);
+
       if (email === elements.email) {
         var userprofmatch = elements;
-        console.log(userprofmatch);
-        //setProductsA(element);
+
         userprofmatch.requests.push(userprof.email);
-        console.log(userprofmatch);
-        //ref.set(userprofmatch)
-        console.log("jjjjjjjjjjj");
-        //console.log(database)
-        //const uniqueId = userprofmatch.id;
-        //await database.collection("products").doc(uniqueId).update()
       }
     }
     return userprofmatch;
@@ -111,21 +88,48 @@ export default PetCard = ({
     <View style={styles.all}>
       <View style={styles.cardContainer}>
         <Image style={styles.imageStyle} source={{ uri: url }}></Image>
-      <Text style={styles.name}>{dogName}</Text>
-      <Text style={styles.raza}>{raza}</Text>
-      <View style={styles.icons}>
-         <WhatsAppOutlined
-          size={40}
-          color="#941DE8"
-          style={styles.icon1}
-          onPress={() => {
-            console.log(email);
-            const a = buscar(email);
-            const t = a.phone;
-            Linking.openURL('https://wa.me/'+t)
-              }
-            }
+        <Text style={styles.name}>{dogName}</Text>
+        <Text style={styles.raza}>{raza}</Text>
+        <View style={styles.icons}>
+          <FontAwesome
+            name="whatsapp"
+            size={47}
+            color="#941DE8"
+            style={styles.icon1}
+            onPress={() => {
+              console.log(email);
+              const a = buscar(email);
+              const t = a.phone;
+              const phone = "http://api.whatsapp.com/send?phone=" + t;
+              console.log(phone);
+
+              Linking.openURL("http://api.whatsapp.com/send?phone=" + t);
+            }}
           />
+          {/* <AntDesign
+            name="whatsapp"
+            size={40}
+            color="#941DE8"
+            style={styles.icon1}
+            onPress={() => {
+              console.log(email);
+              const a = buscar(email);
+              const t = a.phone;
+              const phone = "http://api.whatsapp.com/send?phone=" + t;
+              console.log(phone);
+
+              Linking.openURL("http://api.whatsapp.com/send?phone=" + t);
+            }}
+
+            // onPress={() => {
+            //   console.log(email);
+            //   const a = buscar(email);
+            //   const t = a.phone;
+            //   Linking.openURL(
+            //     "http://api.whatsapp.com/send?phone=+584142335481"
+            //   );
+            // }}
+          /> */}
           <AntDesign
             name="infocirlceo"
             size={40}
@@ -181,7 +185,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     height: 200,
-    width: deviceWidth-230,
+    width: deviceWidth - 230,
     //borderTopRightRadius: radius,
     borderTopLeftRadius: radius,
     //borderBottomEndRadius: radius,
@@ -220,8 +224,9 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  icon1 : {
+  icon1: {
     right: 40,
+    top: -2,
   },
 
   icons2: {
@@ -248,4 +253,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-})
+});

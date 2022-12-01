@@ -6,7 +6,6 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Searchbar } from "react-native-paper";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { useRoute } from "@react-navigation/native";
-
 import PetCard from "./PetCard";
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
 //import { black, white } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
@@ -29,18 +28,19 @@ export default Match = () => {
         if (element.raza === searchQuery && element.email != route.params.userEmail) {
           helper.push(element);
         }
-      setProductsA(helper);
+        setProductsA(helper);
+      }
     }
-  };}
+  };
 
   React.useEffect(() => {
     const collectionRef = collection(database, "products");
     const q = query(collectionRef, orderBy("name", "desc"));
-
+    /*AQUIIIIIII*/
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       setProducts(
         querySnapshot.docs.map((doc) => ({
-          id: doc.id,
+          //id: doc.id,
           email: doc.data().email,
           password: doc.data().password,
           name: doc.data().name,
@@ -55,6 +55,7 @@ export default Match = () => {
         }))
       );
     });
+
     return unsuscribe;
   }, []);
   
@@ -162,10 +163,10 @@ const styles = StyleSheet.create({
   },
   search: {
     flexDirection: "row",
-    justifyContent:'center' 
+    justifyContent: "center",
   },
   searchbar: {
-    width: 400,
+    width: 380,
     marginTop: 15,
     marginBottom: 15,
     borderRadius: 30,

@@ -1,19 +1,7 @@
 import React from "react";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-  Button,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import SingIn from "./SingIn";
-import navigation from "./SingIn";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -23,7 +11,6 @@ export default function DogDataButton() {
   return (
     <TouchableOpacity
       style={styles.container}
-      //onPress={() => navigation.navigate("Onboarding")}
       onPress={() => navigation.navigate("SingIn")}
     >
       <LinearGradient

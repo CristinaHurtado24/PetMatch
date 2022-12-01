@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, StatusBar, BackHandler } from "react-native";
 import Onboarding from "./src/components/Onboarding.js";
 import LandingRegister from "./src/components/LandingRegister.js";
-
-import ButtonGradient from "./src/components/ButtonGradient.js";
 import SingIn from "./src/components/SingIn";
 import RegisterData from "./src/components/RegisterData.js";
 import Match from "./src/components/Match.js";
@@ -11,15 +9,13 @@ import Profile from "./src/components/Profile.js";
 import DogData from "./src/components/DogData.js";
 import ProfileMatch from "./src/components/ProfileMatch.js";
 import { NavigationContainer } from "@react-navigation/native";
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MatchDiscover from "./src/components/MatchDiscover.js";
-
 import { AntDesign } from "@expo/vector-icons";
-
 import { useRoute } from "@react-navigation/native";
+import Events from "./src/components/Events.js";
+import EventCard from "./src/components/EventCard.js";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -42,7 +38,7 @@ function Home() {
         component={MatchDiscover}
         options={{
           headerShown: true,
-          title: "Discover",
+          title: "Buscar",
           headerBackVisible: false,
           tabBarIcon: (tabInfo) => (
             <AntDesign name="home" size={35} color="#941DE8" />
@@ -64,11 +60,24 @@ function Home() {
         initialParams={{ userEmail: route.params.userEmail }}
       />
       <Tab.Screen
+        name="Events"
+        component={Events}
+        options={{
+          headerShown: true,
+          title: "Anuncios",
+          headerBackVisible: false,
+          tabBarIcon: (tabInfo) => (
+            <AntDesign name="notification" size={35} color="#941DE8" />
+          ),
+        }}
+        initialParams={{ userEmail: route.params.userEmail }}
+      />
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
           headerShown: true,
-          title: "Profile",
+          title: "Perfil",
           headerBackVisible: false,
           tabBarIcon: (tabInfo) => (
             <AntDesign name="user" size={35} color="#941DE8" />

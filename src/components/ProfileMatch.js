@@ -10,8 +10,6 @@ import {
   ScrollView,
 } from "react-native";
 
-const { width, height } = Dimensions.get("window");
-
 export default Profile = ({ route, navigation }) => {
   const {
     id,
@@ -46,7 +44,6 @@ export default Profile = ({ route, navigation }) => {
         <Text style={styles.person}>Dueño</Text>
         <Text style={styles.textInput}>{name}</Text>
         <Text style={styles.textInput}>{lastName}</Text>
-        {/* <Text style={styles.textInput}>{phone}</Text> */}
       </View>
     </ScrollView>
   );
