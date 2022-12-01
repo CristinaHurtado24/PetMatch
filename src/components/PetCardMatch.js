@@ -1,10 +1,21 @@
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { database } from "../config/fb";
-import { View, Image, Text, StyleSheet, Dimensions, Alert } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  Button,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { onSnapshot, orderBy, query, collection } from "firebase/firestore";
+import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
 
 export default PetCard = ({
   id,
@@ -80,8 +91,8 @@ export default PetCard = ({
         <Text style={styles.name}>{dogName}</Text>
         <Text style={styles.raza}>{raza}</Text>
         <View style={styles.icons}>
-          <AntDesign
-            name="phone"
+          <FontAwesome
+            name="whatsapp"
             size={40}
             color="#941DE8"
             style={styles.icon1}
@@ -89,9 +100,36 @@ export default PetCard = ({
               console.log(email);
               const a = buscar(email);
               const t = a.phone;
-              Alert.alert(t);
+              const phone = "http://api.whatsapp.com/send?phone=" + t;
+              console.log(phone);
+
+              Linking.openURL("http://api.whatsapp.com/send?phone=" + t);
             }}
           />
+          {/* <AntDesign
+            name="whatsapp"
+            size={40}
+            color="#941DE8"
+            style={styles.icon1}
+            onPress={() => {
+              console.log(email);
+              const a = buscar(email);
+              const t = a.phone;
+              const phone = "http://api.whatsapp.com/send?phone=" + t;
+              console.log(phone);
+
+              Linking.openURL("http://api.whatsapp.com/send?phone=" + t);
+            }}
+
+            // onPress={() => {
+            //   console.log(email);
+            //   const a = buscar(email);
+            //   const t = a.phone;
+            //   Linking.openURL(
+            //     "http://api.whatsapp.com/send?phone=+584142335481"
+            //   );
+            // }}
+          /> */}
           <AntDesign
             name="infocirlceo"
             size={40}

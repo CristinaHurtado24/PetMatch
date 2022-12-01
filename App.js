@@ -14,6 +14,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MatchDiscover from "./src/components/MatchDiscover.js";
 import { AntDesign } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
+import Events from "./src/components/Events.js";
+import EventCard from "./src/components/EventCard.js";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +55,19 @@ function Home() {
           headerBackVisible: false,
           tabBarIcon: (tabInfo) => (
             <AntDesign name="hearto" size={35} color="#941DE8" />
+          ),
+        }}
+        initialParams={{ userEmail: route.params.userEmail }}
+      />
+      <Tab.Screen
+        name="Events"
+        component={Events}
+        options={{
+          headerShown: true,
+          title: "Events",
+          headerBackVisible: false,
+          tabBarIcon: (tabInfo) => (
+            <AntDesign name="notification" size={35} color="#941DE8" />
           ),
         }}
         initialParams={{ userEmail: route.params.userEmail }}

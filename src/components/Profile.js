@@ -9,8 +9,11 @@ import {
   Dimensions,
   ScrollView,
   StatusBar,
+  Button,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
 
 export default Profile = () => {
   const route = useRoute();

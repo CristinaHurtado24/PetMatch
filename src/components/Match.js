@@ -3,9 +3,16 @@ import PetCard from "./PetCardMatch";
 
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
 import { database } from "../config/fb";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  Button,
+} from "firebase/firestore";
 import { useRoute } from "@react-navigation/native";
-
+import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
 const { width, height } = Dimensions.get("window");
 
 export default Match = () => {
